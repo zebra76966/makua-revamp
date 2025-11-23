@@ -39,7 +39,7 @@ const FoldedPaperReveal = ({ image, heightDef, widthDef }) => {
         </div>
 
         {/* RIGHT PANEL */}
-        <div className={`panel right ${open ? "open" : ""}`} style={{ backgroundImage: `url(${image})` }}>
+        <div className={`panel fright ${open ? "open" : ""}`} style={{ backgroundImage: `url(${image})` }}>
           <div className="panel-front"></div>
           <div className="panel-back"></div>
         </div>

@@ -36,17 +36,17 @@
 /* ——————————————— */
 /* RIGHT PANEL — opens SECOND */
 /* ——————————————— */
-.right {
+.fright {
   width: 33.33%;
   height: 100%;
   background-position: right center;
   transform-origin: left center;
   transform: rotateY(90deg);
   left: -1px;
-  transition-delay: 0.8s; /* THIRD */
+  transition-delay: 0.8s;
 }
 
-.right.open {
+.fright.open {
   transform: rotateY(0deg);
 }
 

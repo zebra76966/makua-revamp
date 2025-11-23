@@ -13,13 +13,29 @@
   min-height: 100dvh;
 }
 
+.text-primary-color {
+  color: var(--primary-color) !important;
+}
+
+.text-secondary-color {
+  color: var(--secondary-color) !important;
+}
+
+.bg-primary-color {
+  background-color: var(--primary-color) !important;
+}
+
+.bg-secondary-color {
+  background-color: var(--secondary-color) !important;
+}
+
 .grain-bg {
   background-color: var(--primary-color);
   position: relative;
   overflow: hidden;
 }
 
-.grain-bg::after {
+.grain-bg::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -124,10 +140,10 @@
 
   background-size: 120px 120px, 120px 120px, 4px 4px, 2px 2px;
 
-  animation: grainShift 10s steps(20) infinite;
+  animation: grainShift2 10s steps(20) infinite;
 }
 
-@keyframes grainShift {
+@keyframes grainShift2 {
   0% {
     transform: translate(0, 0);
   }

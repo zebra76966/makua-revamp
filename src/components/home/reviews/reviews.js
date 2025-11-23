@@ -11,7 +11,7 @@ const ReviewCarousel = () => {
         <div className="review-title fs-4">THEY SAY</div>
 
         {/* Carousel */}
-        <Carousel indicators className="review-carousel" interval={60000}>
+        <Carousel indicators className="review-carousel" interval={4000}>
           {reviews.map((item, i) => (
             <Carousel.Item key={i} className="review-slide">
               <div className="h-100 d-flex align-items-center">
