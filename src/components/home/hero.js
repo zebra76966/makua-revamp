@@ -2,20 +2,25 @@ import React, { useState, useRef, useEffect } from "react";
 import { Container } from "react-bootstrap";
 import { motion } from "framer-motion";
 import { FaVolumeUp, FaVolumeMute } from "react-icons/fa";
+import { audio } from "framer-motion/client";
 
 export default function RetreatHero() {
   const [soundOn, setSoundOn] = useState(false);
   const videoRef = useRef(null);
+  const audioRef = useRef(null);
 
   const toggleSound = () => {
     const video = videoRef.current;
+    const audio = audioRef.current;
     if (!video) return;
 
     if (soundOn) {
       video.muted = true;
+      audio.pause();
     } else {
       video.muted = false;
       video.volume = 1.0;
+      audio.play();
     }
 
     setSoundOn(!soundOn);
@@ -43,7 +48,7 @@ export default function RetreatHero() {
       <video
         ref={videoRef}
         className="hero-bg-video"
-        src="/hero-video.mp4" // <-- your video path
+        src="/mainHero.mp4" // <-- your video path
         poster="/hero.png" // <-- set poster
         autoPlay
         loop
@@ -107,6 +112,7 @@ export default function RetreatHero() {
         }}
       >
         {soundOn ? <FaVolumeUp /> : <FaVolumeMute />}
+        <audio ref={audioRef} loop src="/audio2.mp3" />
       </div>
     </div>
   );
