@@ -1,0 +1,75 @@
+/* “THEY SAY” title */
+.review-title {
+  font-size: 14px;
+  letter-spacing: 5px;
+  color: #e8dbc5;
+  margin-bottom: 40px;
+}
+
+/* Carousel slide */
+.review-slide {
+  position: relative;
+  padding: 40px 0;
+  min-height: 80dvh;
+  height: 700px;
+}
+
+/* Frog background */
+.froggy-bg {
+  position: absolute;
+  top: 5%;
+  left: 50%;
+  height: 90%;
+  opacity: 1;
+
+  transform: translateX(-50%);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Quote text */
+.review-quote {
+  line-height: 1.4;
+  position: relative;
+  color: #f3e9d7;
+  font-family: "Kalam", "Patrick Hand", sans-serif;
+  z-index: 9;
+  font-size: 8dvh;
+}
+
+/* Author */
+.review-author {
+  color: #e8dbc5;
+  position: relative;
+  z-index: 99;
+}
+
+/* Custom dots */
+.carousel-indicators [data-bs-target] {
+  width: 12px !important;
+  height: 12px !important;
+  border-radius: 100%;
+  background-color: #e4c38b !important;
+  opacity: 0.6;
+}
+
+.carousel-indicators .active {
+  opacity: 1 !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .review-quote {
+    font-size: 22px;
+  }
+
+  .froggy-bg {
+    width: 260px;
+  }
+}
+
+@media (max-width: 480px) {
+  .review-quote {
+    font-size: 19px;
+  }
+}

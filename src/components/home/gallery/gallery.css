@@ -1,0 +1,99 @@
+.retreat-collage {
+  position: relative;
+  width: 100%;
+  max-width: 1650px;
+  min-height: 900px;
+  margin: 0 auto;
+}
+
+/* === IMAGE POSITIONS (mirroring your collage) === */
+
+.pool-img {
+  position: absolute;
+  top: 40px;
+  left: 20px;
+  width: 45%;
+  max-width: 625px;
+  max-height: 408px;
+  border-radius: 6px;
+}
+
+.frog-top {
+  position: absolute;
+  top: 0;
+  left: 35%;
+  width: 140px;
+  z-index: 101;
+  transform: translateX(-40%);
+}
+
+.center-polaroid {
+  position: absolute;
+  top: 130px;
+  left: 41%;
+  width: 100%;
+  max-width: 392px;
+  max-height: 579px;
+  z-index: 9;
+}
+
+.center-polaroid img {
+  width: 100%;
+  border-radius: 2px;
+}
+
+.bedroom-top {
+  position: absolute;
+  top: 40px;
+  right: 15%;
+  width: 22%;
+  max-width: 286px;
+  max-height: 381px;
+  border-radius: 4px;
+}
+
+.treehouse-img {
+  position: absolute;
+  top: 40px;
+  right: 0%;
+  width: 100%;
+  max-width: 236px;
+  max-height: 311px;
+}
+
+.frog-right {
+  position: absolute;
+  top: 200px;
+  z-index: 999;
+  right: 40px;
+  width: 110px;
+}
+
+.bedroom-bottom {
+  position: absolute;
+  bottom: 40px;
+  right: 80px;
+  width: 35%;
+  border-radius: 4px;
+}
+
+.bathtub-img {
+  position: absolute;
+  bottom: 70px;
+  max-height: 371px;
+  max-width: 286px;
+  left: 22%;
+  width: 22%;
+  border-radius: 4px;
+}
+
+.pond-img {
+  position: absolute;
+  bottom: 70px;
+  max-height: 372px;
+  max-width: 295px;
+  left: 2%;
+  width: 22%;
+
+  border-radius: 4px;
+}
