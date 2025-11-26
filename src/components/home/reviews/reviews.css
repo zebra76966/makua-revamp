@@ -29,12 +29,9 @@
 
 /* Quote text */
 .review-quote {
-  line-height: 1.4;
   position: relative;
-  color: #f3e9d7;
-  font-family: "Kalam", "Patrick Hand", sans-serif;
   z-index: 9;
-  font-size: 8dvh;
+  font-size: 6dvh;
 }
 
 /* Author */

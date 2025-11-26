@@ -5,9 +5,9 @@ import "./contact.css";
 
 const RetreatContact = () => {
   return (
-    <div className="grain-bg d-flex align-items-center justify-content-center  py-5 ch-100">
-      <Container>
-        <Row className="align-items-start g-5">
+    <div className="grain-bg d-flex align-items-center justify-content-center  py-5 px-5 ch-100">
+      <Container fluid className="px-5">
+        <Row className="align-items-start g-5 px-5">
           {/* LEFT SIDE TEXT */}
           <Col md={6}>
             <motion.h1 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="display-1 fw-bold  text-secondary-color">
@@ -30,17 +30,23 @@ const RetreatContact = () => {
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="form-box p-4">
               <Form>
                 <Form.Group className="mb-3">
-                  <Form.Label className="text-secondary-color">NAME</Form.Label>
+                  <Form.Label className="text-secondary-color pFont lead fw-bold" style={{ letterSpacing: "0.3em" }}>
+                    NAME
+                  </Form.Label>
                   <Form.Control type="text" placeholder="Enter name" className="p-3 py-4 bg-secondary-color border-0 rounded-0" />
                 </Form.Group>
 
                 <Form.Group className="mb-3">
-                  <Form.Label className="text-secondary-color">E-MAIL</Form.Label>
+                  <Form.Label className="text-secondary-color pFont lead fw-bold" style={{ letterSpacing: "0.3em" }}>
+                    E-MAIL
+                  </Form.Label>
                   <Form.Control type="email" placeholder="Enter e-mail" className="p-3 py-4 rounded-0 bg-secondary-color border-0 " />
                 </Form.Group>
 
                 <Form.Group className="mb-3">
-                  <Form.Label className="text-secondary-color">MESSAGE</Form.Label>
+                  <Form.Label className="text-secondary-color pFont lead fw-bold" style={{ letterSpacing: "0.3em" }}>
+                    MESSAGE
+                  </Form.Label>
                   <Form.Control as="textarea" rows={10} placeholder="Enter Message" className="bg-secondary-color border-0 rounded-0" />
                 </Form.Group>
 
@@ -49,7 +55,7 @@ const RetreatContact = () => {
                     <Form.Check type="checkbox" id="not-robot" label="I am not a robot" className="custom-check" />
                   </div>
 
-                  <Button className=" px-5 py-4 blob-btn border-0 text-primary-color fw-bold" style={{ backgroundColor: "transparent" }}>
+                  <Button className=" px-5 py-4 blob-btn border-0 fs-4 text-primary-color fw-bold" style={{ backgroundColor: "transparent" }}>
                     SUBMIT
                   </Button>
                 </div>

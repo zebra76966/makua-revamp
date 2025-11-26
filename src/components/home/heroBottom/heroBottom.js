@@ -15,7 +15,7 @@ const HeroPoster = () => {
       />
 
       <div className="hero-content">
-        <motion.h1 className="hero-text" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }}>
+        <motion.h1 className="hero-text text-primary-secondary" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }}>
           HEALING ROOTED IN
           <br />
           TRADITION, GUIDED BY
@@ -25,9 +25,7 @@ const HeroPoster = () => {
           MAKUA.
         </motion.h1>
 
-        <motion.div className="hero-divider" initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: 1, ease: "easeOut" }} />
-
-        <motion.button className=" px-5 py-5 fs-4 blob-btn" whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.97 }}>
+        <motion.button className=" px-5 py-5 fs-4 blob-btn mt-4" whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.97 }}>
           RESERVE
         </motion.button>
       </div>

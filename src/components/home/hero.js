@@ -71,26 +71,15 @@ export default function RetreatHero() {
         style={{
           position: "absolute",
           inset: 0,
-          background: "rgba(0,0,0,0.35)",
+          background: "rgba(0,0,0,0.1)",
           zIndex: 2,
         }}
       />
 
       {/* Main Content */}
-      <Container fluid className="d-flex flex-column justify-content-center align-items-center text-center" style={{ height: "100%", position: "relative", zIndex: 3 }}>
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          style={{
-            color: "#fff",
-            fontFamily: "monospace",
-            fontSize: "42px",
-            letterSpacing: "2px",
-            whiteSpace: "pre-line",
-          }}
-        >
-          {"THIS IS\nNOT A STAY,\nIT'S A RETREAT"}
+      <Container fluid className="d-flex flex-column justify-content-center  align-items-center text-center text-secondary-color mt-5" style={{ height: "100%", position: "relative", zIndex: 3 }}>
+        <motion.h1 className="display-3 pb-4 pt-5" style={{ whiteSpace: "pre-line" }} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }}>
+          {"THIS IS\nNOT A STAY,\nIT'S A \nRETREAT"}
         </motion.h1>
 
         <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 0.8 }}>

@@ -1,0 +1,39 @@
+.card-3d-wrapper {
+  position: relative;
+  width: 380px;
+  height: 550px;
+
+  /* 🔥 Enables true 3D space */
+  transform-style: preserve-3d;
+  perspective: 1800px;
+}
+
+.card-3d-wrapper::before {
+  content: "";
+  position: absolute;
+  border-radius: 5%;
+  height: 120%;
+  width: 100%;
+  background-color: var(--secondary-color) !important;
+}
+
+.card-base {
+  position: absolute;
+  background-color: rgb(0, 0, 0);
+  width: 80%;
+  height: 90%;
+  left: 50%;
+  top: 5%;
+  transform: translate(-50%, 5%);
+  border-radius: 14px;
+}
+
+.floating-item {
+  position: absolute;
+  min-width: 90px;
+  height: auto;
+
+  /* smoother animation */
+  transform-style: preserve-3d;
+  pointer-events: none;
+}

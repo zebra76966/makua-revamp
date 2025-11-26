@@ -3,9 +3,10 @@ import { Container, Card, Carousel, Row, Col } from "react-bootstrap";
 import { motion } from "framer-motion";
 import retreatsData from "./retreatsData.json";
 import "./RetreatCards.css";
+import Floating3DCard from "../../animation/3dCardFlip";
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 40 },
+  hidden: { opacity: 0, y: 100 },
   visible: (i) => ({
     opacity: 1,
     y: 0,
@@ -53,27 +54,29 @@ const RetreatCards = () => {
                   {group.map((item, i) => (
                     <Col lg={4} key={i} className="d-flex">
                       <motion.div custom={i} variants={cardVariants} initial="hidden" whileInView="visible" viewport={{ once: false }} className="w-100 h-100">
-                        <Card className="retreat-card shadow-sm text-center rounded-0 h-100" style={{ background: "transparent" }}>
+                        <Floating3DCard item={item} id={i} />
+
+                        {/* <Card className="retreat-card shadow-sm text-center rounded-0 h-100" style={{ background: "transparent" }}>
                           <div className="retreat-img-wrapper">
                             {item.tag && <div className="retreat-tag px-3 py-1 fs-6">{item.tag}</div>}
                             <Card.Img src={item.image} alt={item.title} className="retreat-img" />
                           </div>
 
                           <Card.Body className="mt-3 d-flex flex-column pb-5">
-                            <p className="retreat-desc fs-5 mb-5">{item.description}</p>
+                            <p className="retreat-desc fs-4 mb-5 text-primary-color">{item.description}</p>
 
                             <div className="mt-auto">
-                              <div className="retreat-tags-container mb-4">
+                              <div className="retreat-tags-container mb-4 ">
                                 {item.focus.map((focus, idx) => (
-                                  <span className="focus-tag" key={idx}>
+                                  <span className="focus-tag text-primary-color fs-6" key={idx}>
                                     {focus}
                                   </span>
                                 ))}
                               </div>
-                              <button className="blob-btn px-5 fs-4 py-3">RESERVE</button>
+                              <button className="blob-btn px-5 fs-4 py-3 ">RESERVE</button>
                             </div>
                           </Card.Body>
-                        </Card>
+                        </Card> */}
                       </motion.div>
                     </Col>
                   ))}

@@ -1,0 +1,67 @@
+.card-3d-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 85dvh;
+  transform-style: preserve-3d;
+  perspective: 2000px;
+  background-color: var(--secondary-color);
+  border: 2px solid var(--primary-color) !important;
+}
+.card-3d-wrapper:hover {
+  scale: 0.98;
+  transition: 0.5s ease-in-out;
+  border: 4px solid var(--primary-color) !important;
+}
+/* FRONT & BACK structure */
+.card-face {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden; /* key for flipping */
+  transform-style: preserve-3d;
+}
+
+/* FRONT side stays normal */
+.card-front {
+  transform: rotateY(0deg);
+  /* rotate: 180deg; */
+  height: 80%;
+  top: 4%;
+  /* top: 16%; */
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* BACK side rotated 180deg */
+.card-back {
+  transform: rotateY(180deg);
+}
+
+/* Your base card */
+.card-base {
+  position: absolute;
+  background-color: var(--primary-color) !important;
+  width: 100%;
+  height: 100%;
+  left: 50%;
+  top: 0%;
+  transform: translate(-50%, 0) translateZ(0px);
+  border-radius: 14px;
+}
+
+.floating-item {
+  position: absolute;
+  min-width: 90px;
+  height: auto;
+  transform-style: preserve-3d;
+  pointer-events: none;
+  filter: drop-shadow(-3px 5px 4px rgba(0, 0, 0, 0.5));
+}
+
+/* Make Bootstrap retreat card align & not interfere with 3D */
+.retreat-card {
+  transform: translateZ(1px); /* ensures visibility */
+  height: 100%;
+}

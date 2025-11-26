@@ -1,11 +1,41 @@
 .navFroggy {
   position: absolute;
-  bottom: 0%;
+  top: 0%;
   left: 50%;
-  transform: translateX(-50%) scale(2.5);
+  transform: translateX(-50%) translateY(-5%) scale(1);
   z-index: 1;
+  animation: scaleOut 2s ease-in-out forwards;
+}
+
+@keyframes scaleOut {
+  0% {
+    transform: translateX(-50%) translateY(-5%) scale(1);
+  }
+  100% {
+    transform: translateX(-50%) translateY(-5%) scale(3.5);
+  }
 }
 
 .txt-stroke {
   -webkit-text-stroke: 1px #cfc3b4;
+}
+
+.navItems {
+  transition: all 0.5s ease-in-out;
+}
+.navItems:hover {
+  color: var(--warning-color) !important;
+  animation: 1s hoverIng ease-in-out infinite;
+}
+
+@keyframes hoverIng {
+  0% {
+    transform: translateY(-5%);
+  }
+  50% {
+    transform: translateY(5%);
+  }
+  100% {
+    transform: translateY(-5%);
+  }
 }

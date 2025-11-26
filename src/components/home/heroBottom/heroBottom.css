@@ -32,13 +32,9 @@
 
 /* Handwritten heading */
 .hero-text {
-  font-family: "Patrick Hand", "Kalam", sans-serif;
-  font-size: 42px;
-  font-weight: 400;
-  line-height: 1.25;
-  letter-spacing: 2px;
+  font-size: 6dvh;
   max-width: 820px;
-  margin: 0 auto 30px;
+  margin: 0 auto;
 }
 
 /* Decorative dotted divider */

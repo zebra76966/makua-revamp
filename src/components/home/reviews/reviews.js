@@ -18,9 +18,9 @@ const ReviewCarousel = () => {
                 <img src={item.image} alt="frog" className="froggy-bg" />
 
                 <div>
-                  <p className="review-quote text-center mx-auto">"{item.quote}"</p>
+                  <p className="review-quote text-center mx-auto hFont text-secondary-color">"{item.quote}"</p>
 
-                  <p className="review-author mt-5 fs-1"> — {item.author}</p>
+                  <p className="review-author mt-5 fs-1 pt-5"> — {item.author}</p>
                 </div>
               </div>
             </Carousel.Item>

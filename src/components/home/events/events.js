@@ -44,8 +44,8 @@ const ScrollableEvents = () => {
   return (
     <div className="events-section grain-bg d-flex align-items-center justify-content-center ch-100 px-5">
       <Container fluid className="px-5">
-        <h2 className="events-title text-center mb-2 fs-5">
-          WORKSHOPS <span className="d-block"> & EVENTS</span>
+        <h2 className="events-title text-center mb-2 fs-5 pFont text-secondary-color fw-bold">
+          WORKSHOPS <span className="d-block pFont"> & EVENTS</span>
         </h2>
 
         {/* Scroll Container */}
@@ -58,14 +58,18 @@ const ScrollableEvents = () => {
                   <div className="polaroid-img-wrapper">
                     <img src={item.image} className="event-image" alt="event" />
 
-                    <div className="date-tag position-absolute top-0 start-0 m-5 p-4 rounded-4">
-                      <div className="dt-day">{item.date.split(" ")[0]}</div>
-                      <div className="dt-rest">{item.date.split(" ")[1]}</div>
-                      <div className="dt-time">{item.time}</div>
+                    <div className="date-tag position-absolute top-0 start-0 m-5 px-3 py-2 rounded-4 text-center  text-warning-color bg-secondary-color">
+                      <div className="dt-day hFont fs-1">{item.date.split(" ")[0]}</div>
+                      <div className="dt-rest pFont fs-5 fw-bold" style={{ letterSpacing: "0.4em" }}>
+                        {item.date.split(" ")[1]}
+                      </div>
+                      <div className="dt-time pFont fs-6 fw-bold " style={{ letterSpacing: "0.4em" }}>
+                        {item.time}
+                      </div>
                     </div>
                   </div>
 
-                  <div className="event-title fs-1 text-center text-primary-color mb-4">{item.title}</div>
+                  <div className="event-title fs-1 text-center text-primary-color mb-4 hFont">{item.title}</div>
                   <div className="bg-primary-color px-2 py-3">
                     <p className="event-desc text-secondary-color text-center lead">{item.description}</p>
                   </div>
