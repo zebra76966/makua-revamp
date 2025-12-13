@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FaShoppingCart, FaUser } from "react-icons/fa";
 import { Container, Row, Col } from "react-bootstrap";
 import FrogBlink from "../animation/frogBlink";
+import { Link, Outlet } from "react-router-dom";
 import "./navbar.css";
 
 export default function MakuaNavbar() {
@@ -103,22 +104,32 @@ export default function MakuaNavbar() {
                 <img src="user.svg" height={35} style={{ cursor: "pointer" }} />
               </div>
             </div>
-
             {/* CONTENT */}
             <Container className="text-center mt-4" style={{ zIndex: 100 }}>
               <Row className="justify-content-center">
                 <Col xs="auto">
                   <div className="d-flex flex-column align-items-center">
-                    {["ABOUT", "RESORT", "RETREATS", "WORKSHOPS & EVENTS", "AYAHUASCA", "CONTACT", "FAQ"].map((item, idx) => (
+                    {[
+                      { label: "ABOUT", path: "/about" },
+                      { label: "RESORT", path: "/resort" },
+                      { label: "RETREATS", path: "/retreats" },
+                      { label: "WORKSHOPS & EVENTS", path: "/workshops" },
+                      { label: "AYAHUASCA", path: "/ayahuasca" },
+                      { label: "CONTACT", path: "/contact" },
+                      { label: "FAQ", path: "/faq" },
+                    ].map((item, idx) => (
                       <motion.div
                         key={idx}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: idx * 0.1 }}
                         style={{ cursor: "pointer" }}
-                        className="fs-1 fw-bold hFont text-primary-color navItems"
+                        className="fs-1 fw-bold  text-primary-color navItems"
+                        onClick={() => setOpen(false)} // Close menu after click
                       >
-                        {item}
+                        <Link to={item.path} className=" hFont text-primary-color" style={{ textDecoration: "none" }}>
+                          {item.label}
+                        </Link>
                       </motion.div>
                     ))}
                   </div>
@@ -128,6 +139,8 @@ export default function MakuaNavbar() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      <Outlet />
     </>
   );
 }

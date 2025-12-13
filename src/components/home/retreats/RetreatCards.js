@@ -3,13 +3,13 @@ import { Container, Card, Carousel, Row, Col } from "react-bootstrap";
 import { motion } from "framer-motion";
 import retreatsData from "./retreatsData.json";
 import "./RetreatCards.css";
-import Floating3DCard from "../../animation/3dCardFlip";
+// import Floating3DCard from "../../animation/3dCardFlip";
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 100 },
+  hidden: { opacity: 0, x: 500 },
   visible: (i) => ({
     opacity: 1,
-    y: 0,
+    x: 0,
     transition: { delay: i * 0.2, duration: 0.6, ease: "easeOut" },
   }),
 };
@@ -54,9 +54,9 @@ const RetreatCards = () => {
                   {group.map((item, i) => (
                     <Col lg={4} key={i} className="d-flex">
                       <motion.div custom={i} variants={cardVariants} initial="hidden" whileInView="visible" viewport={{ once: false }} className="w-100 h-100">
-                        <Floating3DCard item={item} id={i} />
+                        {/* <Floating3DCard item={item} id={i} /> */}
 
-                        {/* <Card className="retreat-card shadow-sm text-center rounded-0 h-100" style={{ background: "transparent" }}>
+                        <Card className="retreat-card shadow-sm text-center rounded-0 h-100" style={{ background: "transparent" }}>
                           <div className="retreat-img-wrapper">
                             {item.tag && <div className="retreat-tag px-3 py-1 fs-6">{item.tag}</div>}
                             <Card.Img src={item.image} alt={item.title} className="retreat-img" />
@@ -76,7 +76,7 @@ const RetreatCards = () => {
                               <button className="blob-btn px-5 fs-4 py-3 ">RESERVE</button>
                             </div>
                           </Card.Body>
-                        </Card> */}
+                        </Card>
                       </motion.div>
                     </Col>
                   ))}

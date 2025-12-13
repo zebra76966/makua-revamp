@@ -5,8 +5,8 @@ const FrogBlink = () => {
     <div className="frogBlinkWrapper">
       <img src={"/froghero-no.svg"} alt="Frog Blinking" className="h-100 w-100" />
 
-      <div className="eyeBlink left"></div>
-      <div className="eyeBlink right"></div>
+      <div className="eyeBlink eleft"></div>
+      <div className="eyeBlink eright"></div>
     </div>
   );
 };

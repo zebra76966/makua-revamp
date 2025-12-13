@@ -126,6 +126,13 @@
   overflow: hidden;
 }
 
+.grain-bg-offwhite {
+  background-color: #cfc3b4;
+  position: relative;
+  overflow: hidden;
+}
+
+.grain-bg-offwhite::before,
 .grain-bg-light::before {
   content: "";
   position: absolute;

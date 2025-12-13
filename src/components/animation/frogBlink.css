@@ -16,7 +16,7 @@
   transform-origin: top center; /* important! */
 }
 
-.eyeBlink.left {
+.eyeBlink.eleft {
   position: absolute;
   bottom: 41.3%;
   left: 45.8%;
@@ -24,7 +24,7 @@
   transform: rotate(30deg);
 }
 
-.eyeBlink.right {
+.eyeBlink.eright {
   position: absolute;
   bottom: 41.3%;
   right: 45.6%;

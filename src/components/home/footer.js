@@ -8,7 +8,7 @@ const Footer = () => {
         {/* Left Section */}
         <div className="footer-left">
           <h1 className="footer-heading">
-            <span className="highlight">MAKUA</span> THE SPIRIT OF WATER
+            <span className="highlight hFont">MAKUA</span> THE SPIRIT OF WATER
             <br />
             AND EARTH. WHERE THE SOUL
             <br />

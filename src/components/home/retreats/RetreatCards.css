@@ -11,14 +11,14 @@
   min-height: 70dvh;
   overflow: hidden;
   position: relative;
-  /* border: 2px solid var(--primary-color) !important; */
+  border: 2px solid var(--primary-color) !important;
   transition: 0.5s ease-in-out;
 }
 
-/* .retreat-card:hover {
+.retreat-card:hover {
   transform: scale(0.98);
   border: 4px solid var(--primary-color) !important;
-} */
+}
 
 /* Image wrapper for absolute tag */
 .retreat-img-wrapper {
@@ -70,7 +70,7 @@
 
 /* Button */
 .blob-btn {
-  background-color: #caa24a;
+  /* background-color: #caa24a; */
   border: none;
   color: #000;
   border-radius: 25px;
@@ -80,7 +80,7 @@
 }
 
 .blob-btn:hover {
-  background-color: #b8933f;
+  /* background-color: #b8933f; */
 }
 
 /* Universal arrow styling */
