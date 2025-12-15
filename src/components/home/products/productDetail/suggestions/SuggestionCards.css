@@ -1,0 +1,129 @@
+/* Card container */
+.events-wrapper {
+  max-width: 1500px;
+}
+
+.retreat-card {
+  border: none;
+  background: #f3f3ef;
+  border-radius: 12px;
+
+  min-height: 70dvh;
+  overflow: hidden;
+  position: relative;
+  border: 2px solid var(--primary-color) !important;
+  transition: 0.5s ease-in-out;
+}
+
+.retreat-card:hover {
+  transform: scale(0.98);
+  border: 4px solid var(--primary-color) !important;
+}
+
+/* Image wrapper for absolute tag */
+.retreat-img-wrapper {
+  position: relative;
+  width: 100%;
+  height: 350px; /* Adjust as needed */
+  overflow: hidden;
+}
+
+/* Image styling */
+.retreat-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  scale: 1.4;
+  transform: translateY(25px); /* move image down */
+}
+
+/* Tag over image */
+.retreat-tag {
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: black;
+  color: white;
+  padding: 6px 14px;
+  font-size: 12px;
+  border-radius: 20px;
+  z-index: 2;
+}
+
+/* Description */
+.retreat-desc {
+  font-size: 15px;
+  color: #444;
+  line-height: 1.6;
+}
+
+/* Focus tags */
+.focus-tag {
+  border: 1.5px solid var(--primary-color);
+  padding: 6px 14px;
+  border-radius: 18px;
+  font-size: 12px;
+  margin: 4px;
+  display: inline-block;
+}
+
+/* Button */
+.blob-btn {
+  /* background-color: #caa24a; */
+  border: none;
+  color: #000;
+  border-radius: 25px;
+  letter-spacing: 4px;
+  font-size: 14px;
+  transition: 0.2s ease;
+}
+
+.blob-btn:hover {
+  /* background-color: #b8933f; */
+}
+
+/* Universal arrow styling */
+.custom-carousel-arrow {
+  color: #000 !important;
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 1;
+  background: none !important;
+  border: none !important;
+  filter: none !important;
+}
+
+/* Remove default blur / gradient background */
+.carousel-control-prev,
+.carousel-control-next {
+  width: 5%; /* makes clicking easier but keeps arrows far out */
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  display: none !important; /* hide bootstrap icons */
+}
+
+/* Absolute extreme positioning */
+.carousel-control-prev {
+  left: -170px !important; /* push more left */
+}
+
+.carousel-control-next {
+  right: -160px !important; /* push more right */
+}
+
+/* For mobile: bring them closer in */
+@media (max-width: 768px) {
+  .carousel-control-prev {
+    left: -20px;
+  }
+  .carousel-control-next {
+    right: -20px;
+  }
+
+  .custom-carousel-arrow {
+    font-size: 36px;
+  }
+}

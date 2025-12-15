@@ -33,6 +33,10 @@
   background-color: var(--secondary-color) !important;
 }
 
+.border-secondary-color {
+  border-color: var(--secondary-color) !important;
+}
+
 .grain-bg {
   background-color: var(--primary-color);
   position: relative;

@@ -1,5 +1,6 @@
 import React from "react";
 import "./footer.css";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -40,12 +41,12 @@ const Footer = () => {
 
         <div className="footer-bottom-center">©2025 MAKUA</div>
 
-        <a href="#" className=" text-decoration-none text-secondary-color">
+        <Link to="/privacy-policy" className=" text-decoration-none text-secondary-color">
           PRIVACY POLICY
-        </a>
-        <a href="#" className=" text-decoration-none text-secondary-color">
+        </Link>
+        <Link to="/404" className=" text-decoration-none text-secondary-color">
           COOKIE POLICY
-        </a>
+        </Link>
       </div>
     </footer>
   );
