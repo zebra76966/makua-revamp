@@ -52,7 +52,7 @@ export default function WorkshopSignupModal({ workshop, onClose, onDone }) {
   const total = workshop.free ? null : Number(workshop.price) * (Number(form.places) || 1);
 
   return (
-    <Modal show centered onHide={onClose} contentClassName="wk-modal">
+    <Modal show centered onHide={onClose} contentClassName="wk-modal" dialogClassName="wk-dialog">
       <Modal.Body className="p-0">
         <div className="wk-modal-head">
           <p className="mk-eyebrow mb-1">{workshop.kind === "event" ? "Event" : "Workshop"}</p>
@@ -98,27 +98,28 @@ export default function WorkshopSignupModal({ workshop, onClose, onDone }) {
                 </p>
               )}
 
-              <div className="mk-row">
+              <div className="mk-row wk-row">
                 <label className="mk-field">
                   <span>Your name</span>
                   <input value={form.name} onChange={set("name")} required maxLength={150} autoComplete="name" />
                 </label>
                 <label className="mk-field">
-                  <span>Email</span>
-                  <input type="email" value={form.email} onChange={set("email")} required maxLength={190} autoComplete="email" />
-                </label>
-              </div>
-
-              <div className="mk-row">
-                <label className="mk-field">
                   <span>Phone <em>(optional)</em></span>
                   <input value={form.phone} onChange={set("phone")} maxLength={40} autoComplete="tel" />
                 </label>
-                <label className="mk-field">
-                  <span>How many of you?</span>
-                  <input type="number" min={1} max={maxPlaces} value={form.places} onChange={set("places")} />
-                </label>
               </div>
+
+              {/* Email gets the full width — half a 500px dialog cuts off
+                  anything longer than about twenty characters. */}
+              <label className="mk-field">
+                <span>Email</span>
+                <input type="email" value={form.email} onChange={set("email")} required maxLength={190} autoComplete="email" />
+              </label>
+
+              <label className="mk-field wk-field--narrow">
+                <span>How many of you?</span>
+                <input type="number" min={1} max={maxPlaces} value={form.places} onChange={set("places")} />
+              </label>
 
               <label className="mk-field">
                 <span>Anything we should know? <em>(optional)</em></span>

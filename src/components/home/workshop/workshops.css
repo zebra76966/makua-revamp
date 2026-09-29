@@ -57,6 +57,10 @@
 .calendar-day.has-event .day-number { font-weight: 700; }
 
 /* ── Sign-up dialog ── */
+/* Bootstrap's dialog is 500px; a touch wider gives the name/email row
+   room to stay side by side instead of collapsing on a desktop screen. */
+.wk-dialog { max-width: 560px; }
+
 .wk-modal {
   border: 0;
   border-radius: 16px;
@@ -68,12 +72,25 @@
   background: var(--primary-color);
   padding: 1.75rem clamp(1.25rem, 4vw, 2rem) 1.5rem;
 }
-.wk-modal-head .mk-eyebrow { color: var(--secondary-color); }
 
-.wk-modal-title {
+/* Two classes on purpose. These share a name with booking.css's .mk-*
+   rules, and CSS bundling order is not something a component can rely on —
+   at one point booking.css landed last and painted this title dark green
+   on the dark green header, at a size the Horus font overhung and the
+   modal then clipped. Winning on specificity instead of luck. */
+.wk-modal .wk-modal-title {
   color: #fff;
-  font-size: clamp(1.4rem, 3.5vw, 1.9rem);
-  margin-bottom: 0.4rem;
+  font-size: clamp(1.25rem, 3vw, 1.65rem);
+  line-height: 1.25;
+  margin: 0 0 0.4rem;
+  /* Horus draws above its line box; this keeps the caps inside the head. */
+  padding-top: 0.15em;
+  overflow-wrap: anywhere;
+}
+
+.wk-modal .wk-modal-head .mk-eyebrow {
+  color: var(--secondary-color);
+  margin-bottom: 0.5rem;
 }
 
 .wk-modal-when {
@@ -84,6 +101,25 @@
 }
 
 .wk-modal-body { padding: clamp(1.25rem, 4vw, 2rem); }
+
+/* Grid children default to min-width:auto, so a long value stretches the
+   column instead of the box scrolling. */
+.wk-modal .mk-field { min-width: 0; }
+.wk-modal .mk-field input,
+.wk-modal .mk-field textarea {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Unfocused, a long address trails off rather than being cut mid-letter. */
+.wk-modal .mk-field input[type="email"] { text-overflow: ellipsis; }
+
+.wk-modal .wk-field--narrow { max-width: 10rem; }
+
+@media (max-width: 520px) {
+  .wk-modal .wk-row { grid-template-columns: 1fr; }
+  .wk-modal .wk-field--narrow { max-width: none; }
+}
 
 .wk-modal-facts {
   display: flex;
@@ -106,14 +142,29 @@
   opacity: 0;
 }
 
+@media (max-width: 620px) {
+  .wk-dialog { max-width: none; margin: 0.5rem; }
+}
+
 @media (max-width: 991px) {
   .calendar-card { margin-top: 1rem; }
 }
 
 @media (max-width: 767px) {
   .facilities-section { padding: 60px 0; }
-  .event-row { flex-wrap: wrap; gap: 0.5rem; }
-  .event-row .text-start { width: auto !important; }
+
+  /* Date and title on the left, the action on the right, rather than
+     three flex children each grabbing a line of their own. */
+  .event-row {
+    display: grid !important;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 0.15rem 0.75rem;
+  }
+  .event-row > div:first-child { grid-column: 1; }
+  .event-row .text-start { width: auto !important; grid-column: 1; }
+  .event-row .event-action { grid-column: 2; grid-row: 1 / span 2; }
+
   .calendar-day { padding: 10px 4px; }
   .calendar-popup { width: 200px; }
 }

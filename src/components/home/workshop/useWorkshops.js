@@ -36,10 +36,15 @@ export const whenLabel = (w) => {
     : `${day} – ${e.format("ddd D MMM")}`;
 };
 
-/** What the button should say for a given workshop. */
+/**
+ * What the card's button should say. Kept short on purpose — these sit in
+ * the blob button, which is a fixed shape, and a long phrase wraps to four
+ * lines on a phone. The full wording lives inside the dialog, where there
+ * is room for it.
+ */
 export const ctaLabel = (w) => {
   if (!w.signupRequired) return null;
-  if (w.full) return "JOIN THE WAITING LIST";
+  if (w.full) return "WAITLIST";
   return w.free ? "RSVP" : "BOOK NOW";
 };
 
