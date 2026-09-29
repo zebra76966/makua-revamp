@@ -106,7 +106,7 @@ const ProductDetail = () => {
                       key={activeIndex}
                       src={images[activeIndex]}
                       className="main-img"
-                      alt={`${retreat.title} — photo ${activeIndex + 1}`}
+                      alt={`${retreat.title} — view ${activeIndex + 1}`}
                       initial={{ opacity: 0, scale: 0.98 }}
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 1.02 }}
@@ -247,7 +247,7 @@ const ProductDetail = () => {
             <Carousel activeIndex={activeIndex} onSelect={(i) => setActiveIndex(i)} indicators interval={3500}>
               {images.map((img, index) => (
                 <Carousel.Item key={img + index}>
-                  <img className="d-block w-100" src={img} alt={`${retreat.title} photo ${index + 1}`} />
+                  <img className="d-block w-100" src={img} alt={`${retreat.title} ${index + 1}`} />
                 </Carousel.Item>
               ))}
             </Carousel>

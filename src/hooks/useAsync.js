@@ -11,7 +11,6 @@ export default function useAsync(fn, deps = [], initial = null) {
   const [error, setError] = useState(null);
   const alive = useRef(true);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const run = useCallback(() => {
     setLoading(true);
     return Promise.resolve()
@@ -19,6 +18,8 @@ export default function useAsync(fn, deps = [], initial = null) {
       .then((res) => { if (alive.current) { setData(res); setError(null); } })
       .catch((err) => { if (alive.current) setError(err); })
       .finally(() => { if (alive.current) setLoading(false); });
+    // The caller owns this dependency list, so it can't be checked here.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
 
   useEffect(() => {

@@ -1,70 +1,31 @@
-# Getting Started with Create React App
+# Makua — build fix for Coolify
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Coolify sets `CI=true`, and Create React App turns every warning into an error
+when it sees that. The build stopped on 30 warnings: two from the new files,
+the rest already in the project.
 
-## Available Scripts
+Copy `src/` over the Makua site's `src/` and deploy. `npm run build` with
+`CI=true` now finishes with "Compiled successfully", and every page was
+re-checked afterwards with no errors.
 
-In the project directory, you can run:
+## What changed (nothing functional)
 
-### `npm start`
+| File | Change |
+|---|---|
+| hooks/useAsync.js | The dependency-list warning is now suppressed where it's raised, with a note saying why |
+| products/productDetail/productDetail.js | Alt text no longer contains the word "photo", which screen readers already announce |
+| 404, hero, aboutHero, ayahuascaHero, resortHero, workshopHero | Dropped an unused `audio` import from framer-motion/client |
+| faqs.js | Dropped unused icon imports; added alt text to two images |
+| navbar.js | Dropped unused icon imports; added alt text to four images |
+| main.js | Dropped an unused import |
+| about + resort introSpirit | Dropped unused imports; added alt text |
+| about + resort sightseeing | Dropped an unused animation variant |
+| resort.js | Dropped three unused imports |
+| ceroTusa.js | `==` is now `===` |
+| eventCalendar.js | Dropped two variables that were set but never read |
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## If you'd rather not wait for this
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Adding `CI=false` to the Coolify build environment also gets you past it. It
+works, but it hides real warnings from every future build, so I'd use these
+files instead.
