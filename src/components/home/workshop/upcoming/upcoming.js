@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import { Container, Carousel, Row, Col } from "react-bootstrap";
 import { motion } from "framer-motion";
 
-import { money } from "../../../../services/api";
+import { money, mediaUrl } from "../../../../services/api";
 import { whenLabel, ctaLabel, placesLabel } from "../useWorkshops";
 import "./upcomingCar.css";
 import "../workshops.css";
@@ -139,7 +139,7 @@ const FacilityCard = ({ item, i, onPick }) => {
       className="facility-card"
     >
       <div className="facility-img-wrapper bg-secondary-color pb-2 shadow rounded-2 px-4 pt-4">
-        <img src={item.image || FALLBACK_IMAGE} alt={item.title} />
+        <img src={mediaUrl(item.image) || FALLBACK_IMAGE} alt={item.title} />
         <h5 className="facility-card-title fw-bold pFont text-center mt-3">{whenLabel(item)}</h5>
       </div>
 

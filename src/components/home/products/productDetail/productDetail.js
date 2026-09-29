@@ -7,7 +7,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { BsArrowLeftCircle } from "react-icons/bs";
 
 import useAsync from "../../../../hooks/useAsync";
-import { retreatsAPI, money, dateRange } from "../../../../services/api";
+import { retreatsAPI, money, dateRange, mediaUrl } from "../../../../services/api";
 import "./productDetail.css";
 
 /* Shown under "What's included" for every retreat. Anything specific to
@@ -66,8 +66,8 @@ const ProductDetail = () => {
   }
 
   /* Photos: the retreat's own picture first, then any room photos. */
-  const roomPhotos = (retreat.rooms || []).flatMap((r) => r.photos || []);
-  const images = [retreat.image, ...roomPhotos, ...GALLERY_FALLBACK].filter(Boolean).slice(0, 6);
+  const roomPhotos = (retreat.rooms || []).flatMap((r) => r.photos || []).map(mediaUrl);
+  const images = [mediaUrl(retreat.image), ...roomPhotos, ...GALLERY_FALLBACK].filter(Boolean).slice(0, 6);
   const included = retreat.highlights?.length
     ? [{ title: "This retreat", items: retreat.highlights }, ...whatsIncluded]
     : whatsIncluded;
@@ -77,7 +77,7 @@ const ProductDetail = () => {
       <div className="ch-100 grain-bg-light">
         <div className="h-100 position-relative">
           <motion.img
-            src={retreat.image || GALLERY_FALLBACK[0]}
+            src={mediaUrl(retreat.image) || GALLERY_FALLBACK[0]}
             alt={retreat.title}
             className="prodHero"
             initial={{ opacity: 0, y: 20, scale: 0.8 }}

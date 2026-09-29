@@ -8,6 +8,25 @@
  */
 const BASE = (process.env.REACT_APP_API_URL || "http://localhost:5055/api").replace(/\/$/, "");
 
+/** Where the API lives, without the trailing /api — uploads are served there. */
+const API_ORIGIN = BASE.replace(/\/api\/?$/, "");
+/**
+ * A stored image path turned into something a browser can actually load.
+ *
+ * Uploaded pictures are written by the backend and served from its own
+ * host (/uploads/...). The website and the admin panel are on different
+ * hostnames, so a bare "/uploads/media/x.png" would resolve against THEM
+ * and 404. Files that ship with the website stay relative, because those
+ * really are served from the site itself.
+ */
+export const mediaUrl = (p) => {
+  if (!p) return "";
+  if (/^(https?:)?\/\//i.test(p) || p.startsWith("data:")) return p;
+  if (p.startsWith("/uploads/")) return `${API_ORIGIN}${p}`;
+  return p;
+};
+
+
 async function request(path, options = {}) {
   const res = await fetch(`${BASE}${path}`, {
     headers: { "Content-Type": "application/json", ...(options.headers || {}) },

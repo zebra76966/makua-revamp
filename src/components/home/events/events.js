@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
 
 import useWorkshops from "../workshop/useWorkshops";
-import { money } from "../../../services/api";
+import { money, mediaUrl } from "../../../services/api";
 import "./events.css";
 
 const FALLBACK_IMAGES = ["/events/eventsA.jpg", "/events/eventsB.jpg", "/events/eventsC.jpg"];
@@ -84,7 +84,7 @@ const ScrollableEvents = () => {
                     <div className="eventcard-body position-relative">
                       <div className="polaroid-img-wrapper">
                         <img
-                          src={item.image || FALLBACK_IMAGES[i % FALLBACK_IMAGES.length]}
+                          src={mediaUrl(item.image) || FALLBACK_IMAGES[i % FALLBACK_IMAGES.length]}
                           className="event-image"
                           alt={item.title}
                         />

@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
 import useAsync from "../../../hooks/useAsync";
-import { retreatsAPI, money, dateRange } from "../../../services/api";
+import { retreatsAPI, money, dateRange, mediaUrl } from "../../../services/api";
 import "./Products.css";
 
 const cardVariants = {
@@ -101,7 +101,7 @@ const ProductsCards = () => {
                         {item.placesLeft} {item.placesLeft === 1 ? "place" : "places"} left
                       </div>
                     ) : null}
-                    <Card.Img src={item.image || FALLBACK_IMAGE} alt={item.title} className="products-img" />
+                    <Card.Img src={mediaUrl(item.image) || FALLBACK_IMAGE} alt={item.title} className="products-img" />
                   </div>
 
                   <Card.Body className="mt-3 d-flex flex-column pb-5">
