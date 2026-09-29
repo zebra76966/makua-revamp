@@ -1,15 +1,13 @@
 import React from "react";
-import { useParams } from "react-router-dom";
 import ProductDetail from "./productDetail";
-import RetreatCards from "../../retreats/RetreatCards";
+import SuggestionCards from "./suggestions/SuggestionCards";
 import Footer from "../../footer";
 
 const ProductDetailMain = () => {
-  const { slug } = useParams();
   return (
     <>
       <ProductDetail />
-      <RetreatCards exclude={slug} heading="OTHER RETREATS" dark />
+      <SuggestionCards />
       <Footer />
     </>
   );

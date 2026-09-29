@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Accordion, Container, Row, Col } from "react-bootstrap";
+import { FaPlus, FaMinus } from "react-icons/fa6";
 import { motion } from "framer-motion";
 import "./faqs.css";
 
@@ -83,7 +84,7 @@ const FAQSection = () => {
                   </Col>
 
                   <Col xs={1} className="text-end">
-                    {activeKey === index.toString() ? <img alt="" src="/eyeClose.svg" height={50} className="ico" /> : <img alt="" src="/eyeOpen.svg" height={35} className="ico" />}
+                    {activeKey === index.toString() ? <img src="/eyeClose.svg" height={50} className="ico" /> : <img src="/eyeOpen.svg" height={35} className="ico" />}
                   </Col>
                 </Row>
 

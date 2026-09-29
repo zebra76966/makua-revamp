@@ -97,8 +97,6 @@
 .legend-item {
   cursor: pointer;
   opacity: 0.5;
-  position: relative;
-  z-index: 10;
 }
 
 .legend-item.active {

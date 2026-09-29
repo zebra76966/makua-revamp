@@ -1,6 +1,6 @@
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import { motion } from "framer-motion";
+import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { color, motion } from "framer-motion";
 import "./introSpirit.css";
 
 const IntroSpirit = () => {
@@ -20,7 +20,7 @@ const IntroSpirit = () => {
 
             <Col md={5}>
               <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="form-box ">
-                <img alt="" src="/retreat/aboutView.png" className="w-100" />
+                <img src="/retreat/aboutView.png" className="w-100" />
               </motion.div>
             </Col>
 

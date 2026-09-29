@@ -51,7 +51,7 @@ export default function CerroTusaSprings() {
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.97 }}
                       />
-                      {idx === 2 && (
+                      {idx == 2 && (
                         <div className="toggler d-flex align-items-center justify-content-center" onClick={() => setShow(true)}>
                           <FaPlus className="fs-1 text-secondary-color" />
                         </div>

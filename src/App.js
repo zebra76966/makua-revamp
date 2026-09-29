@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import "./components/master.css";
 
@@ -14,8 +14,6 @@ import WorkshopMain from "./components/home/workshop/workshopMain";
 import FaqsMain from "./components/faqs/faqsMain";
 import PrivacyPolicy from "./components/privacyPolicy/PrivacyPolicyMain";
 import Err404 from "./components/404";
-import BookPage from "./components/booking/BookPage";
-import ContactMain from "./components/home/contact/contactMain";
 
 function App() {
   return (
@@ -28,11 +26,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/resort" element={<Resort />} />
         <Route path="/retreats" element={<ProductsMain />} />
-        <Route path="/retreats/:slug" element={<ProductDetailMain />} />
-        {/* the old address, kept so existing links and bookmarks still work */}
-        <Route path="/product_detail/:id" element={<Navigate to="/retreats" replace />} />
-        <Route path="/book/:slug" element={<BookPage />} />
-        <Route path="/contact" element={<ContactMain />} />
+        <Route path="/product_detail/:id" element={<ProductDetailMain />} />
         <Route path="/ayahuasca" element={<AyahuascaMain />} />
         <Route path="/workshops" element={<WorkshopMain />} />
         <Route path="/faq" element={<FaqsMain />} />

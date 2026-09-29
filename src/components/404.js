@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { Container } from "react-bootstrap";
 import { motion } from "framer-motion";
 import { FaVolumeUp, FaVolumeMute } from "react-icons/fa";
+import { audio } from "framer-motion/client";
 import { useNavigate } from "react-router-dom";
 import Footer from "./home/footer";
 
