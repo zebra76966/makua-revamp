@@ -55,16 +55,34 @@ export const formsAPI = {
 export const money = (n) =>
   Number(n || 0).toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
 
+/**
+ * Dates arrive as wall-clock strings with no timezone on them —
+ * "2026-11-06" or "2026-10-02 19:00:00" — because a retreat that starts
+ * on the 6th starts on the 6th wherever you're reading this from.
+ *
+ * `new Date("2026-11-06")` would read that as UTC midnight and show
+ * 5 November to anyone in the Americas, so the pieces are handed to the
+ * Date constructor separately, which builds it in local time.
+ */
+export const parseDate = (v) => {
+  if (!v) return null;
+  if (v instanceof Date) return v;
+  const m = String(v).match(/^(\d{4})-(\d{2})-(\d{2})(?:[T ](\d{2}):(\d{2})(?::(\d{2}))?)?/);
+  if (!m) return new Date(v);
+  const [, y, mo, d, hh = 0, mi = 0, ss = 0] = m;
+  return new Date(+y, +mo - 1, +d, +hh, +mi, +ss);
+};
+
 export const shortDate = (d) =>
-  d ? new Date(d).toLocaleDateString("en-US", { month: "short", day: "numeric" }) : "";
+  d ? parseDate(d).toLocaleDateString("en-US", { month: "short", day: "numeric" }) : "";
 
 export const longDate = (d) =>
-  d ? new Date(d).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }) : "";
+  d ? parseDate(d).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }) : "";
 
 /** "Nov 6 – 13, 2026" */
 export const dateRange = (a, b) => {
   if (!a) return "";
-  const s = new Date(a), e = b ? new Date(b) : null;
+  const s = parseDate(a), e = b ? parseDate(b) : null;
   const year = (e || s).getFullYear();
   if (!e) return `${shortDate(a)}, ${year}`;
   const sameMonth = s.getMonth() === e.getMonth();
@@ -72,4 +90,4 @@ export const dateRange = (a, b) => {
 };
 
 export const timeOfDay = (d) =>
-  d ? new Date(d).toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" }) : "";
+  d ? parseDate(d).toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" }) : "";

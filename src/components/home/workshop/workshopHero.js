@@ -3,6 +3,20 @@ import { Container } from "react-bootstrap";
 import { motion } from "framer-motion";
 import { FaVolumeUp, FaVolumeMute } from "react-icons/fa";
 
+/**
+ * Takes the visitor to "Upcoming", which is the second snap section on
+ * desktop and simply the next screenful on mobile, where the snapping
+ * wrapper renders its children plainly.
+ */
+const scrollToUpcoming = () => {
+  const sections = document.querySelectorAll(".page-section");
+  if (sections.length > 1) {
+    sections[1].scrollIntoView({ behavior: "smooth" });
+  } else {
+    window.scrollTo({ top: window.innerHeight, behavior: "smooth" });
+  }
+};
+
 export default function WorkShopHero() {
   const [soundOn, setSoundOn] = useState(false);
   const videoRef = useRef(null);
@@ -82,7 +96,7 @@ export default function WorkShopHero() {
         </motion.h1>
 
         <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 0.8 }}>
-          <button className="blob-btn px-5 fs-2 py-4">RESERVE</button>
+          <button className="blob-btn px-5 fs-2 py-4" onClick={scrollToUpcoming}>RESERVE</button>
         </motion.div>
       </Container>
 
