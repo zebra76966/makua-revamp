@@ -3,15 +3,6 @@ import { Col, Container, Row } from "react-bootstrap";
 import { motion } from "framer-motion";
 import "./sights.css";
 
-const fadeIn = {
-  hidden: { opacity: 0, scale: 0.9 },
-  show: {
-    opacity: 1,
-    scale: 1,
-    transition: { duration: 0.8, ease: "easeOut" },
-  },
-};
-
 export default function SightSeeing() {
   return (
     <div className="ch-100">

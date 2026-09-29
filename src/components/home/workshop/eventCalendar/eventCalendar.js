@@ -61,7 +61,7 @@ const eventsData = [
 
 const EventsCalendar = () => {
   const [currentMonth, setCurrentMonth] = useState(dayjs("2025-09-01"));
-  const [activeDate, setActiveDate] = useState(null);
+  const [, setActiveDate] = useState(null);
   const [hoveredDate, setHoveredDate] = useState(null);
   const [filterType, setFilterType] = useState("all"); // event | workshop | all
 
@@ -79,8 +79,6 @@ const EventsCalendar = () => {
       return acc;
     }, {});
   }, [filteredEvents]);
-
-  const activeEvents = hoveredDate ? eventsByDate[hoveredDate] : null;
 
   useEffect(() => {
     setActiveDate(null);

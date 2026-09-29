@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 import { Container } from "react-bootstrap";
 import { motion } from "framer-motion";
 import { FaVolumeUp, FaVolumeMute } from "react-icons/fa";
-import { audio } from "framer-motion/client";
 
 export default function WorkShopHero() {
   const [soundOn, setSoundOn] = useState(false);

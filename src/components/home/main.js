@@ -1,7 +1,6 @@
 import React from "react";
 import RetreatHero from "./hero";
 
-import FoldedPaperReveal from "../animation/CrumpledPaperReveal";
 import SpiritOfWaterEarth from "./spiritWater";
 import RetreatCollage from "./gallery/gallery";
 import RetreatCards from "./retreats/RetreatCards";

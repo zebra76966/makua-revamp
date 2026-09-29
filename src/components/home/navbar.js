@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaShoppingCart, FaUser } from "react-icons/fa";
 import { Container, Row, Col } from "react-bootstrap";
 import FrogBlink from "../animation/frogBlink";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -54,7 +53,7 @@ export default function MakuaNavbar() {
 
         <div className="d-flex align-items-center gap-3 fs-3 text-secondary-color">
           <div className="position-relative" style={{ cursor: "pointer" }}>
-            <img src="/shopping-cart.svg" height={40} style={{ cursor: "pointer", filter: isProductDetail ? "brightness(0) saturate(100%)" : "none" }} />
+            <img alt="" src="/shopping-cart.svg" height={40} style={{ cursor: "pointer", filter: isProductDetail ? "brightness(0) saturate(100%)" : "none" }} />
             <div
               className="position-absolute d-flex justify-content-center align-items-center text-white rounded-circle pFont"
               style={{ top: "-8px", right: "-10px", background: "#c68445", width: "20px", height: "20px", fontSize: "12px" }}
@@ -62,7 +61,7 @@ export default function MakuaNavbar() {
               1
             </div>
           </div>
-          <img src="/user.svg" height={35} style={{ cursor: "pointer", filter: isProductDetail ? "brightness(0) saturate(100%)" : "none" }} />
+          <img alt="" src="/user.svg" height={35} style={{ cursor: "pointer", filter: isProductDetail ? "brightness(0) saturate(100%)" : "none" }} />
         </div>
       </div>
 
@@ -103,7 +102,7 @@ export default function MakuaNavbar() {
 
               <div className="d-flex align-items-center gap-3 fw-bold fs-3">
                 <div className="position-relative" style={{ cursor: "pointer" }}>
-                  <img src="/shopping-cart.svg" height={40} />
+                  <img alt="" src="/shopping-cart.svg" height={40} />
                   <div
                     className="position-absolute d-flex justify-content-center align-items-center text-white rounded-circle"
                     style={{
@@ -118,7 +117,7 @@ export default function MakuaNavbar() {
                     1
                   </div>
                 </div>
-                <img src="/user.svg" height={35} style={{ cursor: "pointer" }} />
+                <img alt="" src="/user.svg" height={35} style={{ cursor: "pointer" }} />
               </div>
             </div>
 
