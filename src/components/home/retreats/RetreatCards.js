@@ -64,11 +64,7 @@ const RetreatCards = ({ exclude = null, heading = null, dark = false }) => {
   return (
     <div className={`ch-100 ${dark ? "grain-bg" : "grain-bg-light"} d-flex align-items-center px-lg-5`}>
       <Container fluid className="py-5 px-5">
-        {heading && (
-          <p className={`fs-5 text-center pFont fw-bold wSpacing mb-4 ${dark ? "text-secondary-color" : "text-primary-color"}`}>
-            {heading}
-          </p>
-        )}
+        {heading && <p className={`fs-5 text-center pFont fw-bold wSpacing mb-4 ${dark ? "text-secondary-color" : "text-primary-color"}`}>{heading}</p>}
         {/* DESKTOP (>= 992px) */}
         <div className="d-none d-lg-block">
           <Carousel
@@ -91,7 +87,7 @@ const RetreatCards = ({ exclude = null, heading = null, dark = false }) => {
                   {group.map((item, i) => (
                     <Col lg={4} key={item.id} className="d-flex">
                       <motion.div custom={i} variants={cardVariants} initial="hidden" whileInView="visible" viewport={{ once: false }} className="w-100 h-100">
-                        <Card className="retreat-card shadow-sm text-center rounded-0 h-100" style={{ background: "transparent" }}>
+                        <Card className="retreat-card shadow-sm text-center rounded-0 h-100 bg-grain-light">
                           <div className="retreat-img-wrapper">
                             {cardTag(item) && <div className="retreat-tag px-3 py-1 fs-6">{cardTag(item)}</div>}
                             <Card.Img src={mediaUrl(item.image) || FALLBACK_IMAGE} alt={item.title} className="retreat-img" />
@@ -181,7 +177,9 @@ const CardSlide = ({ item, i }) => {
           <div className="mt-auto">
             <div className="retreat-tags-container mb-4">
               {(item.focus || []).map((focus, idx) => (
-                <span className="focus-tag" key={idx}>{focus}</span>
+                <span className="focus-tag" key={idx}>
+                  {focus}
+                </span>
               ))}
             </div>
 

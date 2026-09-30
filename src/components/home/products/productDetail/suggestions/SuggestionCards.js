@@ -122,7 +122,7 @@ const SuggestionCards = () => {
 // Card slide as a component (reused for tablet + mobile)
 const CardSlide = ({ item, i }) => (
   <motion.div custom={i} variants={cardVariants} initial="hidden" whileInView="visible" viewport={{ once: true }} className="w-100 h-100">
-    <Card className="retreat-card shadow-sm text-center rounded-0 h-100" style={{ background: "transparent" }}>
+    <Card className="retreat-card shadow-sm text-center rounded-0 h-100 grain-bg-light">
       <div className="retreat-img-wrapper">
         {item.tag && <div className="retreat-tag px-3 py-1 fs-6">{item.tag}</div>}
         <Card.Img src={item.image} alt={item.title} className="retreat-img" />
