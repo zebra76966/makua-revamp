@@ -2,11 +2,13 @@ import React, { useState, useRef, useEffect } from "react";
 import { Container } from "react-bootstrap";
 import { motion } from "framer-motion";
 import { FaVolumeUp, FaVolumeMute } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 export default function RetreatHero() {
   const [soundOn, setSoundOn] = useState(false);
   const videoRef = useRef(null);
   const audioRef = useRef(null);
+  const navigate = useNavigate();
 
   const toggleSound = () => {
     const video = videoRef.current;
@@ -81,7 +83,7 @@ export default function RetreatHero() {
           {"THIS IS\nNOT A STAY,\nIT'S A \nRETREAT"}
         </motion.h1>
 
-        <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 0.8 }}>
+        <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 0.8 }} onClick={() => navigate("/retreats")}>
           <button className="blob-btn px-5 fs-2 py-4">RESERVE</button>
         </motion.div>
       </Container>
