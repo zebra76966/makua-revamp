@@ -15,6 +15,10 @@
   scroll-behavior: smooth;
   gap: 40px;
   padding-bottom: 20px;
+  /* Cards land square rather than half on and half off. */
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
 }
 
 .scroll-container::-webkit-scrollbar {
@@ -24,25 +28,43 @@
 /* Event Card */
 .event-card {
   width: 320px;
-
   padding-bottom: 30px;
-
-  /* position: relative; */
   min-width: 26dvw;
+  scroll-snap-align: start;
+  cursor: pointer;
+  /* The rail stretches every card to the tallest one; this passes that
+     height down so a long description doesn't leave one card standing
+     proud of its neighbours. */
+  display: flex;
+  flex-direction: column;
 }
 
 .eventcard-body {
   border: 1px solid rgba(255, 255, 255, 0.15);
   background: var(--secondary-color);
   width: 100%;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Pin Image */
+/* The price band sits on the bottom edge of every card, level across
+   the row, whatever the title above it wrapped to. */
+.eventcard-body > .bg-primary-color {
+  margin-top: auto;
+}
+
+/* Pin Image
+   Centred by its own margins. It used to combine `mx-auto` with
+   `left: 50%` and a -50% shift, which happened to land in the middle at
+   the desktop card width and drifted off to the right at every other. */
 .pin-img {
   position: relative;
+  display: block;
   width: 56px;
-  left: 50%;
-  transform: translateX(-50%) translateY(60%);
+  margin-left: auto;
+  margin-right: auto;
+  transform: translateY(60%);
   z-index: 99;
 }
 
@@ -60,48 +82,14 @@
   border: 3px solid #cfc3b1;
 }
 
+/* The date, pinned inside the photo's top-left corner. */
+.date-tag {
+  margin: 44px 0 0 44px;
+}
+
 /* Title */
 .event-title {
   font-family: "Patrick Hand", cursive;
-}
-
-/* Scroll Arrows */
-.scroll-btn {
-  position: absolute;
-  bottom: 5px;
-
-  background: var(--primary-color);
-  border: 2px solid var(--secondary-color);
-
-  color: var(--secondary-color);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 99;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.scroll-btn:hover {
-  transform: scale(1.08);
-}
-
-/* Left Arrow */
-.left-btn {
-  left: -70px;
-}
-
-/* Right Arrow */
-.right-btn {
-  right: -70px;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .left-btn,
-  .right-btn {
-    display: none;
-  }
 }
 
 .event-meta {
@@ -111,4 +99,147 @@
   opacity: 0.7;
 }
 
-.event-card { cursor: pointer; }
+/* ── The controls ────────────────────────────────────────
+   One row under the rail, arrows at the right, the way the
+   design has it. They used to sit at left/right: -70px,
+   outside the wrapper, where they were easy to miss and
+   hidden outright below 768px. */
+.ev-controls {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1.5rem;
+  margin-top: 1.25rem;
+}
+
+.ev-arrows {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.scroll-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  border: 2px solid var(--secondary-color);
+  color: var(--secondary-color);
+  font-size: 1.35rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.scroll-btn:hover:not(:disabled) {
+  transform: scale(1.08);
+}
+
+/* Still there, plainly unavailable — rather than vanishing and
+   shifting the row about as you scroll. */
+.scroll-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.scroll-btn:focus-visible {
+  outline: 2px solid var(--secondary-color);
+  outline-offset: 3px;
+}
+
+/* Which card you're on. Only worth showing when one card fills
+   the screen, so it's off until the phone breakpoint. */
+.ev-dots {
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ev-dot {
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(233, 222, 199, 0.35);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.ev-dot.is-on {
+  background: var(--warning-color, #c89b3c);
+  transform: scale(1.15);
+}
+
+/* ── Tablet ── */
+@media (max-width: 991.98px) {
+  .event-card { min-width: 46dvw; }
+  .event-image { min-height: 360px; }
+  .date-tag { margin: 28px 0 0 28px; }
+
+  .date-tag .dt-day  { font-size: 1.9rem !important; }
+  .date-tag .dt-rest { font-size: 0.88rem !important; letter-spacing: 0.3em !important; }
+  .date-tag .dt-time { font-size: 0.78rem !important; letter-spacing: 0.3em !important; }
+}
+
+/* ── Phone ──
+   One card at a time, dots centred, the arrow at the right. */
+@media (max-width: 767.98px) {
+  .scroll-container {
+    gap: 22px;
+    /* One card on screen at a time, so matching their heights only adds
+       a band of empty card under the short ones. */
+    align-items: flex-start;
+  }
+
+  .event-card {
+    width: 100%;
+    min-width: 100%;
+    padding-bottom: 16px;
+  }
+
+  .event-image {
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 3 / 4;
+  }
+
+  .polaroid-img-wrapper { padding: 14px; }
+
+  /* On a phone the photo is a third of the size it is on a desktop, and
+     the date was taking up most of it. */
+  .date-tag {
+    margin: 16px 0 0 16px;
+    padding: 0.3rem 0.55rem !important;
+  }
+
+  .date-tag .dt-day  { font-size: 1.3rem !important; }
+  .date-tag .dt-rest { font-size: 0.66rem !important; letter-spacing: 0.2em !important; }
+  .date-tag .dt-time { font-size: 0.62rem !important; letter-spacing: 0.2em !important; }
+
+  .event-title { font-size: 1.75rem !important; }
+
+  .ev-controls { justify-content: center; }
+
+  .ev-dots { display: flex; }
+
+  .ev-arrows {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .scroll-btn {
+    width: 48px;
+    height: 48px;
+    font-size: 1.1rem;
+  }
+
+  /* With the arrow pinned right, the left one would sit on top of the
+     dots on a narrow phone — the dots are the way back there. */
+  .ev-arrows .scroll-btn:first-child { display: none; }
+}

@@ -97,3 +97,139 @@
 
   border-radius: 4px;
 }
+
+/* ══════════════════════════════════════════════════════════
+   SMALL SCREENS
+
+   Everything above is absolutely positioned inside a box that
+   is 900px tall whatever the screen is, so below about 1200px
+   the nine pieces sat on top of each other. Rather than
+   shrinking a layout that only works wide, the collage is
+   rebuilt below that width: the pieces stack, keep their
+   overlap, and the ones the phone design leaves out are
+   dropped instead of squeezed in.
+   ══════════════════════════════════════════════════════════ */
+
+/* ── Shared: out of the absolute layout ── */
+@media (max-width: 1199.98px) {
+  .retreat-wrapper { padding-left: 1.5rem; padding-right: 1.5rem; }
+
+  .retreat-collage { min-height: 0; }
+
+  .retreat-collage .collage-img,
+  .retreat-collage .center-polaroid {
+    position: relative;
+    inset: auto;
+    width: auto;
+    max-width: none;
+    max-height: none;
+    transform: none;
+  }
+
+  .retreat-collage img { width: 100%; height: auto; display: block; }
+
+  /* The torn-paper frogs carry their size as inline styles, so the
+     override has to shout, and the Bootstrap container inside them
+     brings padding that isn't wanted here. */
+  .frog-top .container,
+  .frog-right .container { padding: 0 !important; }
+
+  /* Two views of the same pool, and no room for both.
+     Prefixed with the collage, because `.retreat-collage img` above is
+     the more specific selector and would otherwise keep them on. */
+  .retreat-collage .bathtub-img,
+  .retreat-collage .pond-img { display: none; }
+}
+
+/* ── Tablet: a six-piece collage in two columns ──
+   A grid rather than a stack of negative margins: every piece is told
+   which row and column it belongs to, so one image growing can't push
+   the rest of the collage out of shape. The overlaps are then just
+   margins within a cell. */
+@media (min-width: 768px) and (max-width: 1199.98px) {
+  .retreat-collage {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 18px;
+    row-gap: 0;
+    align-items: start;
+  }
+
+  .pool-img {
+    grid-area: 1 / 1 / 2 / 3;
+    width: 80% !important;
+    justify-self: start;
+  }
+
+  .frog-top {
+    grid-area: 1 / 2 / 2 / 3;
+    width: 230px !important;
+    justify-self: end;
+    align-self: end;
+    margin: 0 2% -46px 0 !important;
+    z-index: 101;
+  }
+  .frog-top .fold-container { width: 230px !important; height: 148px !important; }
+
+  .center-polaroid {
+    grid-area: 2 / 1 / 3 / 2;
+    width: 84% !important;
+    justify-self: start;
+    margin: 26px 0 0 6% !important;
+    z-index: 9;
+  }
+
+  .bedroom-top {
+    grid-area: 2 / 2 / 3 / 3;
+    width: 84% !important;
+    justify-self: end;
+    margin: 96px 0 0 0 !important;
+  }
+
+  .treehouse-img {
+    grid-area: 3 / 1 / 4 / 2;
+    width: 66% !important;
+    justify-self: start;
+    margin: -28px 0 0 14% !important;
+  }
+
+  .frog-right {
+    grid-area: 3 / 2 / 4 / 3;
+    width: 140px !important;
+    justify-self: start;
+    margin: -76px 0 0 0 !important;
+    z-index: 999;
+  }
+  .frog-right .fold-container { width: 140px !important; height: 215px !important; }
+
+  .bedroom-bottom {
+    grid-area: 4 / 1 / 5 / 3;
+    width: 64% !important;
+    justify-self: end;
+    margin: -64px 0 0 0 !important;
+  }
+}
+
+/* ── Phone: the four pieces from the design, stacked ── */
+@media (max-width: 767.98px) {
+  .retreat-wrapper { padding-left: 1rem; padding-right: 1rem; }
+
+  .retreat-collage {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .pool-img { width: 88% !important; align-self: flex-end; }
+
+  .frog-top { width: 168px !important; align-self: flex-end; margin: -64px 6% -16px 0 !important; z-index: 101; }
+  .frog-top .fold-container { width: 168px !important; height: 108px !important; }
+
+  .center-polaroid { width: 62% !important; align-self: flex-start; margin: 10px 0 0 2% !important; z-index: 9; }
+
+  .bedroom-bottom { width: 92% !important; align-self: center; margin: 18px 0 0 0 !important; }
+
+  .retreat-collage .bedroom-top,
+  .retreat-collage .treehouse-img,
+  .retreat-collage .frog-right { display: none; }
+}

@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { Container, Card, Carousel, Row, Col } from "react-bootstrap";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import useAsync from "../../../hooks/useAsync";
 import { retreatsAPI, money, dateRange, mediaUrl } from "../../../services/api";
 import "./RetreatCards.css";
@@ -16,8 +16,44 @@ const cardTag = (item) => {
   return null;
 };
 
+/* The two ways out of this section, under the carousel on every size.
+   They're the only links there, so they carry their own arrow rather
+   than a button that would compete with RESERVE on the cards. */
+const RetreatLinks = ({ dark }) => (
+  <div className={`retreat-links ${dark ? "retreat-links--dark" : ""}`}>
+    <Link to="/contact" className="retreat-link pFont">
+      SET UP A<span className="d-block">DISCOVERY CALL</span>
+    </Link>
+    <Link to="/retreats" className="retreat-link retreat-link--end pFont">
+      FIND OUT<span className="d-block">MORE</span>
+    </Link>
+  </div>
+);
+
+/* The carousel chevrons, shared by all three breakpoints — the tablet and
+   phone carousels used to fall back to Bootstrap's own icons, which this
+   stylesheet hides, so they had no arrows at all. */
+const prevIcon = (
+  <span className="custom-carousel-arrow prev-arrow">
+    <img src="/arrowLeft.svg" alt="" />
+  </span>
+);
+const nextIcon = (
+  <span className="custom-carousel-arrow next-arrow">
+    <img src="/arrowLeft.svg" alt="" style={{ transform: "rotateY(180deg)" }} />
+  </span>
+);
+
+/* The cards used to come in from 500px to the right, which on anything
+   narrower than a desktop parked them outside the carousel — and the
+   carousel clips what overflows it. A card nobody can see never counts
+   as "in view", so it never animated in: on a tablet the second card
+   stayed at opacity 0 for ever, waiting for itself. Sixty pixels reads
+   as the same movement and always starts somewhere visible. */
+const CARD_VIEWPORT = { once: true, amount: 0.15 };
+
 const cardVariants = {
-  hidden: { opacity: 0, x: 500 },
+  hidden: { opacity: 0, x: 60 },
   visible: (i) => ({
     opacity: 1,
     x: 0,
@@ -67,27 +103,14 @@ const RetreatCards = ({ exclude = null, heading = null, dark = false }) => {
         {heading && <p className={`fs-5 text-center pFont fw-bold wSpacing mb-4 ${dark ? "text-secondary-color" : "text-primary-color"}`}>{heading}</p>}
         {/* DESKTOP (>= 992px) */}
         <div className="d-none d-lg-block">
-          <Carousel
-            interval={null}
-            indicators={false}
-            prevIcon={
-              <span className="custom-carousel-arrow prev-arrow">
-                <img src="/arrowLeft.svg" alt="left arrow" />
-              </span>
-            }
-            nextIcon={
-              <span className="custom-carousel-arrow next-arrow">
-                <img src="/arrowLeft.svg" alt="left arrow" style={{ transform: "rotateY(180deg)" }} />
-              </span>
-            }
-          >
+          <Carousel interval={null} indicators={false} controls={desktopChunks.length > 1} prevIcon={prevIcon} nextIcon={nextIcon}>
             {desktopChunks.map((group, index) => (
               <Carousel.Item key={index}>
                 <Row className="g-4 justify-content-center">
                   {group.map((item, i) => (
                     <Col lg={4} key={item.id} className="d-flex">
-                      <motion.div custom={i} variants={cardVariants} initial="hidden" whileInView="visible" viewport={{ once: false }} className="w-100 h-100">
-                        <Card className="retreat-card shadow-sm text-center rounded-0 h-100 bg-grain-light">
+                      <motion.div custom={i} variants={cardVariants} initial="hidden" whileInView="visible" viewport={CARD_VIEWPORT} className="w-100 h-100">
+                        <Card className="retreat-card shadow-sm text-center rounded-0 h-100 grain-bg-light">
                           <div className="retreat-img-wrapper">
                             {cardTag(item) && <div className="retreat-tag px-3 py-1 fs-6">{cardTag(item)}</div>}
                             <Card.Img src={mediaUrl(item.image) || FALLBACK_IMAGE} alt={item.title} className="retreat-img" />
@@ -125,7 +148,7 @@ const RetreatCards = ({ exclude = null, heading = null, dark = false }) => {
 
         {/* TABLETS (≥768px and <992px) */}
         <div className="d-none d-md-block d-lg-none">
-          <Carousel interval={null} indicators={false}>
+          <Carousel interval={null} indicators={false} controls={tabletChunks.length > 1} prevIcon={prevIcon} nextIcon={nextIcon}>
             {tabletChunks.map((group, index) => (
               <Carousel.Item key={index}>
                 <Row className="g-4 justify-content-center">
@@ -142,7 +165,7 @@ const RetreatCards = ({ exclude = null, heading = null, dark = false }) => {
 
         {/* MOBILE (<768px) */}
         <div className="d-block d-md-none">
-          <Carousel interval={null} indicators={false}>
+          <Carousel interval={null} indicators={false} controls={mobileChunks.length > 1} prevIcon={prevIcon} nextIcon={nextIcon}>
             {mobileChunks.map((group, index) => (
               <Carousel.Item key={index}>
                 <CardSlide item={group[0]} i={index} />
@@ -150,6 +173,8 @@ const RetreatCards = ({ exclude = null, heading = null, dark = false }) => {
             ))}
           </Carousel>
         </div>
+
+        <RetreatLinks dark={dark} />
       </Container>
     </div>
   );
@@ -160,8 +185,8 @@ const CardSlide = ({ item, i }) => {
   const navigate = useNavigate();
   if (!item) return null;
   return (
-    <motion.div custom={i} variants={cardVariants} initial="hidden" whileInView="visible" viewport={{ once: true }} className="w-100 h-100">
-      <Card className="retreat-card shadow-sm text-center rounded-0 h-100" style={{ background: "transparent" }}>
+    <motion.div custom={i} variants={cardVariants} initial="hidden" whileInView="visible" viewport={CARD_VIEWPORT} className="w-100 h-100">
+      <Card className="retreat-card shadow-sm text-center rounded-0 h-100 grain-bg-light" style={{ background: "transparent" }}>
         <div className="retreat-img-wrapper">
           {cardTag(item) && <div className="retreat-tag px-3 py-1 fs-6">{cardTag(item)}</div>}
           <Card.Img src={mediaUrl(item.image) || FALLBACK_IMAGE} alt={item.title} className="retreat-img" />

@@ -68,7 +68,9 @@
   transition: opacity 0.2s ease;
 }
 
-.nav-icon:hover { opacity: 0.7; }
+.nav-icon:hover {
+  opacity: 0.7;
+}
 
 .nav-icon:focus-visible {
   outline: 2px solid currentColor;
@@ -105,4 +107,6 @@
   line-height: 1;
   white-space: nowrap;
 }
-.nav-book:hover { opacity: 0.75; }
+.nav-book:hover {
+  opacity: 0.75;
+}

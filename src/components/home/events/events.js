@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useCallback } from "react";
 import { Container } from "react-bootstrap";
 import { motion } from "framer-motion";
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa6";
@@ -19,44 +19,65 @@ const cardVariants = {
 /**
  * The postcard strip on the home page. Same list as the workshops page,
  * cut to the next six, and every card takes you there to book.
+ *
+ * It scrolls by exactly one card, measured from the cards themselves
+ * rather than a guessed number of pixels, so a card never ends up half
+ * on and half off the screen.
  */
 const ScrollableEvents = () => {
   const scrollRef = useRef(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(true);
+  const [canScrollRight, setCanScrollRight] = useState(false);
+  const [active, setActive] = useState(0);
   const navigate = useNavigate();
 
   const { workshops, loading } = useWorkshops();
   const items = workshops.slice(0, 6);
 
-  const checkScroll = () => {
-    const scroll = scrollRef.current;
-    if (!scroll) return;
-    setCanScrollLeft(scroll.scrollLeft > 20);
-    setCanScrollRight(scroll.scrollLeft + scroll.clientWidth < scroll.scrollWidth - 20);
-  };
+  /* One card plus the gap between two of them. Measured from the first
+     two cards so it stays right when the card width changes with the
+     viewport. */
+  const step = useCallback(() => {
+    const rail = scrollRef.current;
+    const cards = rail?.querySelectorAll(".event-card");
+    if (!cards?.length) return 400;
+    if (cards.length > 1) return cards[1].offsetLeft - cards[0].offsetLeft;
+    return cards[0].offsetWidth;
+  }, []);
+
+  const checkScroll = useCallback(() => {
+    const rail = scrollRef.current;
+    if (!rail) return;
+    setCanScrollLeft(rail.scrollLeft > 8);
+    setCanScrollRight(rail.scrollLeft + rail.clientWidth < rail.scrollWidth - 8);
+    setActive(Math.round(rail.scrollLeft / step()));
+  }, [step]);
 
   useEffect(() => {
     checkScroll();
-  }, [items.length]);
+    window.addEventListener("resize", checkScroll);
+    return () => window.removeEventListener("resize", checkScroll);
+  }, [items.length, checkScroll]);
 
-  const scrollRight = () => {
-    scrollRef.current.scrollBy({ left: 800, behavior: "smooth" });
-    setTimeout(checkScroll, 300);
+  const by = (n) => {
+    scrollRef.current?.scrollBy({ left: n * step(), behavior: "smooth" });
+    window.setTimeout(checkScroll, 400);
   };
 
-  const scrollLeft = () => {
-    scrollRef.current.scrollBy({ left: -800, behavior: "smooth" });
-    setTimeout(checkScroll, 300);
+  const goTo = (i) => {
+    scrollRef.current?.scrollTo({ left: i * step(), behavior: "smooth" });
+    window.setTimeout(checkScroll, 400);
   };
 
   /* Nothing scheduled is a normal state — the strip steps aside rather
      than showing an empty rail. */
   if (!loading && items.length === 0) return null;
 
+  const scrollable = canScrollLeft || canScrollRight;
+
   return (
     <div className="events-section grain-bg d-flex align-items-center justify-content-center ch-100 px-lg-5 px-0">
-      <Container fluid className="px-lg-5 px-2">
+      <Container fluid className="px-lg-5 px-3">
         <h2 className="events-title text-center mb-2 fs-5 pFont text-secondary-color fw-bold">
           WORKSHOPS <span className="d-block pFont"> &amp; EVENTS</span>
         </h2>
@@ -64,8 +85,8 @@ const ScrollableEvents = () => {
         {loading ? (
           <p className="text-center text-secondary-color fs-4 py-5 mb-0">Loading what's coming up…</p>
         ) : (
-          <div className="scroll-wrapper mx-auto ps-5">
-            <div className="scroll-container mx-auto ps-5" ref={scrollRef} onScroll={checkScroll}>
+          <div className="scroll-wrapper mx-auto">
+            <div className="scroll-container" ref={scrollRef} onScroll={checkScroll}>
               {items.map((item, i) => {
                 const start = dayjs(item.startsAt);
                 return (
@@ -89,7 +110,7 @@ const ScrollableEvents = () => {
                       <div className="polaroid-img-wrapper">
                         <img src={mediaUrl(item.image) || FALLBACK_IMAGES[i % FALLBACK_IMAGES.length]} className="event-image" alt={item.title} />
 
-                        <div className="date-tag position-absolute top-0 start-0 m-5 px-3 py-2 rounded-4 text-center text-warning-color bg-secondary-color">
+                        <div className="date-tag position-absolute top-0 start-0 px-3 py-2 rounded-4 text-center text-warning-color bg-secondary-color">
                           <div className="dt-day hFont fs-1">{start.format("ddd").toUpperCase()}</div>
                           <div className="dt-rest pFont fs-5 fw-bold" style={{ letterSpacing: "0.4em" }}>
                             {start.format("DD.MM")}
@@ -114,22 +135,28 @@ const ScrollableEvents = () => {
               })}
             </div>
 
-            {canScrollLeft && (
-              <motion.button className="scroll-btn left-btn p-4 rounded-circle" whileHover={{ scale: 1.1 }} onClick={scrollLeft} aria-label="Scroll left">
-                <FaArrowLeft size={28} />
-              </motion.button>
-            )}
+            {/* Only drawn when there's somewhere to go. */}
+            {scrollable && (
+              <div className="ev-controls">
+                <div className="ev-dots">
+                  {items.map((item, i) => (
+                    <button key={item.id} type="button" className={`ev-dot ${i === active ? "is-on" : ""}`} aria-label={`Show ${item.title}`} aria-current={i === active} onClick={() => goTo(i)} />
+                  ))}
+                </div>
 
-            {canScrollRight && (
-              <motion.button
-                className="scroll-btn right-btn p-4 rounded-circle"
-                animate={{ x: [0, 6, 0] }}
-                transition={{ repeat: Infinity, duration: 1.4, ease: "easeInOut" }}
-                onClick={scrollRight}
-                aria-label="Scroll right"
-              >
-                <FaArrowRight size={28} />
-              </motion.button>
+                <div className="ev-arrows">
+                  <button type="button" className="scroll-btn" onClick={() => by(-1)} disabled={!canScrollLeft} aria-label="Previous workshops">
+                    <FaArrowLeft />
+                  </button>
+
+                  {/* Still, the way the design has it. The old one nudged
+                      itself sideways for ever, which is a lot of movement to
+                      put on screen permanently. */}
+                  <button type="button" className="scroll-btn" onClick={() => by(1)} disabled={!canScrollRight} aria-label="More workshops">
+                    <FaArrowRight />
+                  </button>
+                </div>
+              </div>
             )}
           </div>
         )}

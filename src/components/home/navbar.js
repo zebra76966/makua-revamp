@@ -36,7 +36,7 @@ export default function MakuaNavbar() {
 
   return (
     <>
-      <div className={`position-absolute top-0 start-0 w-100 py-3 px-4 d-flex justify-content-between align-items-center text-light`} style={{ zIndex: 50 }}>
+      <div className={`position-absolute top-0 start-0 w-100 py-3 px-4 d-flex justify-content-between align-items-center text-light topNav`} style={{ zIndex: 50 }}>
         <div onClick={() => setOpen(true)} className="d-flex flex-column justify-content-center fs-5 fw-bold" style={{ cursor: "pointer", letterSpacing: "4px" }}>
           <span className="mb-1 pFont text-secondary-color" style={{ cursor: "pointer", filter: isProductDetail ? "brightness(0) saturate(100%)" : "none" }}>
             MENU
@@ -58,30 +58,20 @@ export default function MakuaNavbar() {
 
         {/* The basket count is real, and the icons go somewhere. */}
         <div className="nav-actions">
-          <Link
-            to="/retreats"
-            className={`nav-book pFont text-decoration-none ${tone}`}
-            onClick={() => setOpen(false)}
-          >
+          <Link to="/retreats" className={`nav-book pFont text-decoration-none d-md-inline d-none ${tone}`} onClick={() => setOpen(false)}>
             BOOK
           </Link>
 
-          <button
-            type="button"
-            className={`nav-icon ${tone}`}
-            onClick={() => setCartOpen(true)}
-            aria-label={count ? `Basket, ${count} item${count === 1 ? "" : "s"}` : "Basket, empty"}
-          >
+          <button type="button" className={`nav-icon ${tone}`} onClick={() => setCartOpen(true)} aria-label={count ? `Basket, ${count} item${count === 1 ? "" : "s"}` : "Basket, empty"}>
             <HiOutlineShoppingBag />
-            {count > 0 && <span className="nav-badge" aria-hidden="true">{count > 9 ? "9+" : count}</span>}
+            {count > 0 && (
+              <span className="nav-badge" aria-hidden="true">
+                {count > 9 ? "9+" : count}
+              </span>
+            )}
           </button>
 
-          <Link
-            to="/account"
-            className={`nav-icon ${tone}`}
-            aria-label="Your account"
-            onClick={() => setOpen(false)}
-          >
+          <Link to="/account" className={`nav-icon ${tone}`} aria-label="Your account" onClick={() => setOpen(false)}>
             <HiOutlineUser />
           </Link>
         </div>
@@ -123,18 +113,28 @@ export default function MakuaNavbar() {
               />
 
               <div className="nav-actions">
-                <Link to="/retreats" className="nav-book pFont text-decoration-none text-primary-color"
-                  onClick={() => setOpen(false)}>BOOK</Link>
+                <Link to="/retreats" className="nav-book pFont text-decoration-none text-primary-color d-md-inline d-none" onClick={() => setOpen(false)}>
+                  BOOK
+                </Link>
 
-                <button type="button" className="nav-icon text-primary-color"
-                  onClick={() => { setOpen(false); setCartOpen(true); }}
-                  aria-label={count ? `Basket, ${count} items` : "Basket, empty"}>
+                <button
+                  type="button"
+                  className="nav-icon text-primary-color"
+                  onClick={() => {
+                    setOpen(false);
+                    setCartOpen(true);
+                  }}
+                  aria-label={count ? `Basket, ${count} items` : "Basket, empty"}
+                >
                   <HiOutlineShoppingBag />
-                  {count > 0 && <span className="nav-badge" aria-hidden="true">{count > 9 ? "9+" : count}</span>}
+                  {count > 0 && (
+                    <span className="nav-badge" aria-hidden="true">
+                      {count > 9 ? "9+" : count}
+                    </span>
+                  )}
                 </button>
 
-                <Link to="/account" className="nav-icon text-primary-color" aria-label="Your account"
-                  onClick={() => setOpen(false)}>
+                <Link to="/account" className="nav-icon text-primary-color" aria-label="Your account" onClick={() => setOpen(false)}>
                   <HiOutlineUser />
                 </Link>
               </div>

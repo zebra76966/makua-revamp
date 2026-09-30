@@ -39,8 +39,8 @@ const RetreatContact = ({ source = "host-a-retreat" }) => {
   };
 
   return (
-    <div className="grain-bg d-flex align-items-center justify-content-center  py-5 px-xl-5 ch-100">
-      <Container fluid className="px-lg-5">
+    <div className="grain-bg d-flex align-items-center justify-content-center  py-5 px-xl-5 ch-100 ">
+      <Container fluid className="px-lg-5 pt-lg-0 pt-5">
         <Row className="align-items-start g-5 px-lg-5 px-2">
           {/* LEFT SIDE TEXT */}
           <Col md={6}>

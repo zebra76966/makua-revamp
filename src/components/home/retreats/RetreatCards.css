@@ -114,16 +114,82 @@
   right: -160px !important; /* push more right */
 }
 
-/* For mobile: bring them closer in */
-@media (max-width: 768px) {
+/* Below the desktop carousel, bring them in over the card edges, which is
+   where the design has them.
+   These need !important to beat the desktop rules above, which have it —
+   without it the next arrow stayed 160px off the right edge and gave every
+   page with this carousel a sideways scroll. The cut-off is 991.98px, not
+   768px: between the two, the tablet carousel was still pushing its arrows
+   off the side of the screen. */
+@media (max-width: 991.98px) {
   .carousel-control-prev {
-    left: -20px;
+    left: 0 !important;
   }
   .carousel-control-next {
-    right: -20px;
+    right: 0 !important;
   }
 
   .custom-carousel-arrow {
     font-size: 36px;
+  }
+
+  /* The arrow is an SVG with no width of its own, so it would otherwise
+     draw at its natural size across half the card. Desktop is left alone. */
+  .custom-carousel-arrow img {
+    width: 34px;
+    height: auto;
+    display: block;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .custom-carousel-arrow img { width: 26px; }
+}
+
+/* ── The two links under the carousel ──
+   Bottom left and bottom right, as in the design. */
+.retreat-links {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+
+.retreat-link {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  line-height: 1.7;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--primary-color);
+  transition: opacity 0.2s ease;
+}
+
+.retreat-link:hover,
+.retreat-link:focus-visible {
+  color: var(--primary-color);
+  opacity: 0.65;
+}
+
+.retreat-link--end { text-align: right; }
+
+/* On the dark background the same pair has to read the other way round. */
+.retreat-links--dark .retreat-link { color: var(--secondary-color); }
+.retreat-links--dark .retreat-link:hover,
+.retreat-links--dark .retreat-link:focus-visible { color: var(--secondary-color); }
+
+@media (max-width: 767.98px) {
+  .retreat-links {
+    margin-top: 2rem;
+    gap: 1rem;
+  }
+
+  /* 12px is the floor we hold everywhere else on the site; letter-spacing
+     comes down instead so the two lines still fit side by side. */
+  .retreat-link {
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
   }
 }

@@ -1,8 +1,11 @@
 import React from "react";
 import { motion } from "framer-motion";
 import "./heroBottom.css";
+import { useNavigate } from "react-router-dom";
 
 const HeroPoster = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="hero-poster-wrapper">
       <video
@@ -25,7 +28,14 @@ const HeroPoster = () => {
           MAKUA.
         </motion.h1>
 
-        <motion.button className=" px-5 py-5 fs-4 blob-btn mt-4" whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.97 }}>
+        <motion.button
+          className=" px-5 py-5 fs-4 blob-btn mt-4"
+          onClick={() => {
+            navigate("/retreats");
+          }}
+          whileHover={{ scale: 1.08 }}
+          whileTap={{ scale: 0.97 }}
+        >
           RESERVE
         </motion.button>
       </div>

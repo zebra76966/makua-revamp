@@ -57,7 +57,9 @@
   color: #303030;
   cursor: pointer;
   transition: 0.25s ease;
-  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15), inset 0 2px 4px rgba(255, 255, 255, 0.4);
+  box-shadow:
+    0 5px 12px rgba(0, 0, 0, 0.15),
+    inset 0 2px 4px rgba(255, 255, 255, 0.4);
 }
 
 .hero-btn:hover {
@@ -68,6 +70,9 @@
 @media (max-width: 768px) {
   .hero-text {
     font-size: 30px;
+  }
+  .hero-content {
+    width: 75%;
   }
 }
 
