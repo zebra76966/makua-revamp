@@ -56,6 +56,10 @@
   font-size: 15px;
   color: #444;
   line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 /* Focus tags */
@@ -143,7 +147,9 @@
 }
 
 @media (max-width: 767.98px) {
-  .custom-carousel-arrow img { width: 26px; }
+  .custom-carousel-arrow img {
+    width: 26px;
+  }
 }
 
 /* ── The two links under the carousel ──
@@ -173,12 +179,18 @@
   opacity: 0.65;
 }
 
-.retreat-link--end { text-align: right; }
+.retreat-link--end {
+  text-align: right;
+}
 
 /* On the dark background the same pair has to read the other way round. */
-.retreat-links--dark .retreat-link { color: var(--secondary-color); }
+.retreat-links--dark .retreat-link {
+  color: var(--secondary-color);
+}
 .retreat-links--dark .retreat-link:hover,
-.retreat-links--dark .retreat-link:focus-visible { color: var(--secondary-color); }
+.retreat-links--dark .retreat-link:focus-visible {
+  color: var(--secondary-color);
+}
 
 @media (max-width: 767.98px) {
   .retreat-links {
