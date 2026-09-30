@@ -8,3 +8,9 @@
   margin-left: 10px;
   font-size: 15px;
 }
+
+@media (max-width: 768px) {
+  .blob-btn.fs-4 {
+    font-size: 1.3rem !important;
+  }
+}

@@ -5,12 +5,17 @@ import FrogBlink from "../animation/frogBlink";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { Link, Outlet } from "react-router-dom";
+import { HiOutlineShoppingBag, HiOutlineUser } from "react-icons/hi2";
+import { useCart } from "../../context/CartContext";
 import "./navbar.css";
 
 export default function MakuaNavbar() {
+  const { count, setOpen: setCartOpen } = useCart();
+  /* The product page sits on a light background; everywhere else is dark. */
   const location = useLocation();
   const navigate = useNavigate();
   const [isProductDetail, setIsProductDetail] = useState(false);
+  const tone = isProductDetail ? "text-dark-color" : "text-secondary-color";
   useEffect(() => {
     const isDetailPage = location.pathname.startsWith("/product_detail/");
     setIsProductDetail(isDetailPage);
@@ -51,15 +56,33 @@ export default function MakuaNavbar() {
           onClick={() => navigate("/")}
         />
 
-        {/* There is no basket and no member area on this site — the cart
-            icon with its hardcoded "1" and the user icon both went
-            nowhere. One link that does something instead. */}
-        <div className="d-flex align-items-center gap-3">
+        {/* The basket count is real, and the icons go somewhere. */}
+        <div className="nav-actions">
           <Link
             to="/retreats"
-            className={`nav-book pFont text-decoration-none ${isProductDetail ? "text-dark-color" : "text-secondary-color"}`}
+            className={`nav-book pFont text-decoration-none ${tone}`}
+            onClick={() => setOpen(false)}
           >
             BOOK
+          </Link>
+
+          <button
+            type="button"
+            className={`nav-icon ${tone}`}
+            onClick={() => setCartOpen(true)}
+            aria-label={count ? `Basket, ${count} item${count === 1 ? "" : "s"}` : "Basket, empty"}
+          >
+            <HiOutlineShoppingBag />
+            {count > 0 && <span className="nav-badge" aria-hidden="true">{count > 9 ? "9+" : count}</span>}
+          </button>
+
+          <Link
+            to="/account"
+            className={`nav-icon ${tone}`}
+            aria-label="Your account"
+            onClick={() => setOpen(false)}
+          >
+            <HiOutlineUser />
           </Link>
         </div>
       </div>
@@ -99,13 +122,20 @@ export default function MakuaNavbar() {
                 }}
               />
 
-              <div className="d-flex align-items-center gap-3 fw-bold fs-3">
-                <Link
-                  to="/retreats"
-                  className="nav-book pFont text-decoration-none text-primary-color"
-                  onClick={() => setOpen(false)}
-                >
-                  BOOK
+              <div className="nav-actions">
+                <Link to="/retreats" className="nav-book pFont text-decoration-none text-primary-color"
+                  onClick={() => setOpen(false)}>BOOK</Link>
+
+                <button type="button" className="nav-icon text-primary-color"
+                  onClick={() => { setOpen(false); setCartOpen(true); }}
+                  aria-label={count ? `Basket, ${count} items` : "Basket, empty"}>
+                  <HiOutlineShoppingBag />
+                  {count > 0 && <span className="nav-badge" aria-hidden="true">{count > 9 ? "9+" : count}</span>}
+                </button>
+
+                <Link to="/account" className="nav-icon text-primary-color" aria-label="Your account"
+                  onClick={() => setOpen(false)}>
+                  <HiOutlineUser />
                 </Link>
               </div>
             </div>
@@ -118,6 +148,7 @@ export default function MakuaNavbar() {
                       { label: "ABOUT", path: "/about" },
                       { label: "RESORT", path: "/resort" },
                       { label: "RETREATS", path: "/retreats" },
+                      { label: "SHOP", path: "/shop" },
                       { label: "WORKSHOPS & EVENTS", path: "/workshops" },
                       { label: "AYAHUASCA", path: "/ayahuasca" },
                       { label: "CONTACT", path: "/contact" },

@@ -21,10 +21,17 @@ import CancellationPolicy from "./components/legal/CancellationPolicy";
 import Err404 from "./components/404";
 import BookPage from "./components/booking/BookPage";
 import ContactMain from "./components/home/contact/contactMain";
+import ShopPage from "./components/shop/ShopPage";
+import ProductPage from "./components/shop/ProductPage";
+import CheckoutPage from "./components/shop/CheckoutPage";
+import CartDrawer from "./components/shop/CartDrawer";
+import AccountPage from "./components/account/AccountPage";
+import { CartProvider } from "./context/CartContext";
 
 function App() {
   return (
     <Router>
+      <CartProvider>
       <ScrollToTop />
       <MakuaNavbar />
 
@@ -38,6 +45,10 @@ function App() {
         <Route path="/product_detail/:id" element={<Navigate to="/retreats" replace />} />
         <Route path="/book/:slug" element={<BookPage />} />
         <Route path="/contact" element={<ContactMain />} />
+        <Route path="/shop" element={<ShopPage />} />
+        <Route path="/shop/:slug" element={<ProductPage />} />
+        <Route path="/checkout" element={<CheckoutPage />} />
+        <Route path="/account" element={<AccountPage />} />
         <Route path="/ayahuasca" element={<AyahuascaMain />} />
         <Route path="/workshops" element={<WorkshopMain />} />
         <Route path="/faq" element={<FaqsMain />} />
@@ -48,6 +59,10 @@ function App() {
         <Route path="/cookie-policy" element={<Navigate to="/privacy-policy" replace />} />
         <Route path="*" element={<Err404 />} />
       </Routes>
+
+      {/* Slides in from the right whenever something is added. */}
+      <CartDrawer />
+      </CartProvider>
     </Router>
   );
 }

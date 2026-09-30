@@ -15,23 +15,33 @@ const RetreatContact = ({ source = "host-a-retreat" }) => {
   const [error, setError] = useState("");
   const [sent, setSent] = useState(false);
 
-  const set = (k) => (e) => { setForm((f) => ({ ...f, [k]: e.target.value })); setError(""); };
+  const set = (k) => (e) => {
+    setForm((f) => ({ ...f, [k]: e.target.value }));
+    setError("");
+  };
 
   const submit = async (e) => {
     e.preventDefault();
-    if (!confirmed) { setError("Please tick the box to confirm you're a person."); return; }
-    setBusy(true); setError("");
+    if (!confirmed) {
+      setError("Please tick the box to confirm you're a person.");
+      return;
+    }
+    setBusy(true);
+    setError("");
     try {
       await formsAPI.enquiry({ ...form, source });
       setSent(true);
-    } catch (err) { setError(err.message); }
-    finally { setBusy(false); }
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setBusy(false);
+    }
   };
 
   return (
-    <div className="grain-bg d-flex align-items-center justify-content-center  py-5 px-5 ch-100">
-      <Container fluid className="px-5">
-        <Row className="align-items-start g-5 px-5">
+    <div className="grain-bg d-flex align-items-center justify-content-center  py-5 px-xl-5 ch-100">
+      <Container fluid className="px-lg-5">
+        <Row className="align-items-start g-5 px-lg-5 px-2">
           {/* LEFT SIDE TEXT */}
           <Col md={6}>
             <motion.h1 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="display-1 fw-bold  text-secondary-color">
@@ -58,45 +68,69 @@ const RetreatContact = ({ source = "host-a-retreat" }) => {
                   <p className="lead mb-0">We've got your message and someone will write back to {form.email}.</p>
                 </div>
               ) : (
-              <Form onSubmit={submit} noValidate>
-                <Form.Group className="mb-3" controlId="contact-name">
-                  <Form.Label className="text-secondary-color pFont lead fw-bold" style={{ letterSpacing: "0.3em" }}>
-                    NAME
-                  </Form.Label>
-                  <Form.Control type="text" placeholder="Enter name" value={form.name} onChange={set("name")} required autoComplete="name" className="p-3 py-4 bg-secondary-color border-0 rounded-0" />
-                </Form.Group>
+                <Form onSubmit={submit} noValidate>
+                  <Form.Group className="mb-3" controlId="contact-name">
+                    <Form.Label className="text-secondary-color pFont lead fw-bold" style={{ letterSpacing: "0.3em" }}>
+                      NAME
+                    </Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Enter name"
+                      value={form.name}
+                      onChange={set("name")}
+                      required
+                      autoComplete="name"
+                      className="p-3 py-4 bg-secondary-color border-0 rounded-0"
+                    />
+                  </Form.Group>
 
-                <Form.Group className="mb-3" controlId="contact-email">
-                  <Form.Label className="text-secondary-color pFont lead fw-bold" style={{ letterSpacing: "0.3em" }}>
-                    E-MAIL
-                  </Form.Label>
-                  <Form.Control type="email" placeholder="Enter e-mail" value={form.email} onChange={set("email")} required autoComplete="email" className="p-3 py-4 rounded-0 bg-secondary-color border-0 " />
-                </Form.Group>
+                  <Form.Group className="mb-3" controlId="contact-email">
+                    <Form.Label className="text-secondary-color pFont lead fw-bold" style={{ letterSpacing: "0.3em" }}>
+                      E-MAIL
+                    </Form.Label>
+                    <Form.Control
+                      type="email"
+                      placeholder="Enter e-mail"
+                      value={form.email}
+                      onChange={set("email")}
+                      required
+                      autoComplete="email"
+                      className="p-3 py-4 rounded-0 bg-secondary-color border-0 "
+                    />
+                  </Form.Group>
 
-                <Form.Group className="mb-3" controlId="contact-message">
-                  <Form.Label className="text-secondary-color pFont lead fw-bold" style={{ letterSpacing: "0.3em" }}>
-                    MESSAGE
-                  </Form.Label>
-                  <Form.Control as="textarea" rows={10} placeholder="Enter Message" value={form.message} onChange={set("message")} required className="bg-secondary-color border-0 rounded-0" />
-                </Form.Group>
+                  <Form.Group className="mb-3" controlId="contact-message">
+                    <Form.Label className="text-secondary-color pFont lead fw-bold" style={{ letterSpacing: "0.3em" }}>
+                      MESSAGE
+                    </Form.Label>
+                    <Form.Control as="textarea" rows={10} placeholder="Enter Message" value={form.message} onChange={set("message")} required className="bg-secondary-color border-0 rounded-0" />
+                  </Form.Group>
 
-                {/* Left empty by people; only robots fill it in. */}
-                <input type="text" tabIndex={-1} autoComplete="off" value={form.website} onChange={set("website")}
-                  style={{ position: "absolute", left: "-9999px", opacity: 0 }} aria-hidden="true" />
+                  {/* Left empty by people; only robots fill it in. */}
+                  <input type="text" tabIndex={-1} autoComplete="off" value={form.website} onChange={set("website")} style={{ position: "absolute", left: "-9999px", opacity: 0 }} aria-hidden="true" />
 
-                {error && <p className="text-warning-color lead mb-3">{error}</p>}
+                  {error && <p className="text-warning-color lead mb-3">{error}</p>}
 
-                <div className="d-md-flex gap-3 align-items-center justify-content-between">
-                  <div className="d-flex align-items-center gap-3 bg-secondary-color py-4 ps-3  w-50">
-                    <Form.Check type="checkbox" id="not-robot" label="I am not a robot" className="custom-check"
-                      checked={confirmed} onChange={(e) => { setConfirmed(e.target.checked); setError(""); }} />
+                  <div className="d-flex gap-3 align-items-center justify-content-between">
+                    <div className="d-flex align-items-center gap-3 bg-secondary-color py-4 ps-3  w-50">
+                      <Form.Check
+                        type="checkbox"
+                        id="not-robot"
+                        label="I am not a robot"
+                        className="custom-check"
+                        checked={confirmed}
+                        onChange={(e) => {
+                          setConfirmed(e.target.checked);
+                          setError("");
+                        }}
+                      />
+                    </div>
+
+                    <Button type="submit" disabled={busy} className=" px-lg-5 px-3 py-lg-4 py-3 blob-btn border-0 fs-4 text-primary-color fw-bold" style={{ backgroundColor: "transparent" }}>
+                      {busy ? "SENDING…" : "SUBMIT"}
+                    </Button>
                   </div>
-
-                  <Button type="submit" disabled={busy} className=" px-5 py-4 blob-btn border-0 fs-4 text-primary-color fw-bold" style={{ backgroundColor: "transparent" }}>
-                    {busy ? "SENDING…" : "SUBMIT"}
-                  </Button>
-                </div>
-              </Form>
+                </Form>
               )}
             </motion.div>
           </Col>

@@ -1,0 +1,133 @@
+/* ── Account: retreats, workshops and orders on one page ── */
+
+.acc-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2.5rem;
+}
+
+.acc-section { margin-bottom: 2.75rem; }
+
+.acc-section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1.35rem;
+  color: var(--primary-color);
+  margin: 0 0 1rem;
+}
+
+.acc-pill {
+  background: var(--warning-color);
+  color: #fff;
+  font-family: "quicksand", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  min-width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  padding: 0 0.45rem;
+}
+
+.acc-empty {
+  font-family: "quicksand", sans-serif;
+  color: #6f6c5f;
+  margin: 0;
+}
+
+.acc-list { display: flex; flex-direction: column; gap: 0.75rem; }
+
+.acc-card {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  background: #fff;
+  border: 1px solid #e0dbcd;
+  border-radius: 14px;
+  padding: 1.1rem 1.25rem;
+}
+
+.acc-card-main { min-width: 0; flex: 1 1 16rem; }
+
+.acc-when {
+  font-family: "quicksand", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--warning-color);
+  margin: 0 0 0.3rem;
+}
+
+.acc-name {
+  font-size: 1.15rem;
+  color: var(--primary-color);
+  margin: 0 0 0.3rem;
+}
+
+.acc-meta {
+  font-family: "quicksand", sans-serif;
+  font-size: 0.88rem;
+  color: #6f6c5f;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.acc-items {
+  list-style: none;
+  margin: 0 0 0.4rem;
+  padding: 0;
+  font-family: "quicksand", sans-serif;
+  font-size: 0.92rem;
+  color: var(--primary-color);
+}
+.acc-items li { margin-bottom: 0.15rem; }
+.acc-items-opt { color: #6f6c5f; }
+
+.acc-card-side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.45rem;
+  flex-shrink: 0;
+}
+
+.acc-status {
+  font-family: "quicksand", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.22rem 0.6rem;
+  border-radius: 999px;
+  background: #ece7db;
+  color: #6f6c5f;
+  white-space: nowrap;
+}
+.acc-status.is-confirmed,
+.acc-status.is-paid,
+.acc-status.is-collected,
+.acc-status.is-shipped { background: rgba(22, 163, 74, 0.13); color: #15803d; }
+.acc-status.is-waitlist,
+.acc-status.is-new,
+.acc-status.is-pending,
+.acc-status.is-packed { background: rgba(166, 93, 43, 0.14); color: #a65d2b; }
+.acc-status.is-cancelled { background: rgba(185, 28, 28, 0.1); color: #b91c1c; }
+
+.acc-total {
+  font-family: "quicksand", sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+@media (max-width: 575px) {
+  .acc-card { flex-direction: column; }
+  .acc-card-side { flex-direction: row; align-items: center; justify-content: space-between; width: 100%; }
+}

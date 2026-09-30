@@ -68,6 +68,14 @@ export const workshopsAPI = {
     request(`/public/workshops/${id}/signup`, { method: "POST", body: JSON.stringify(payload) }),
 };
 
+/* ── The shop ───────────────────────────────────────────── */
+export const shopAPI = {
+  list: () => request("/public/products").then((d) => d.products || []),
+  get: (slug) => request(`/public/products/${encodeURIComponent(slug)}`),
+  info: () => request("/public/shop-info"),
+  order: (payload) => request("/public/orders", { method: "POST", body: JSON.stringify(payload) }),
+};
+
 /* ── Forms ──────────────────────────────────────────────── */
 export const formsAPI = {
   enquiry: (payload) => request("/public/enquiries", { method: "POST", body: JSON.stringify(payload) }),

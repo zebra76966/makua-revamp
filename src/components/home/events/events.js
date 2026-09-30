@@ -36,7 +36,9 @@ const ScrollableEvents = () => {
     setCanScrollRight(scroll.scrollLeft + scroll.clientWidth < scroll.scrollWidth - 20);
   };
 
-  useEffect(() => { checkScroll(); }, [items.length]);
+  useEffect(() => {
+    checkScroll();
+  }, [items.length]);
 
   const scrollRight = () => {
     scrollRef.current.scrollBy({ left: 800, behavior: "smooth" });
@@ -53,8 +55,8 @@ const ScrollableEvents = () => {
   if (!loading && items.length === 0) return null;
 
   return (
-    <div className="events-section grain-bg d-flex align-items-center justify-content-center ch-100 px-5">
-      <Container fluid className="px-5">
+    <div className="events-section grain-bg d-flex align-items-center justify-content-center ch-100 px-lg-5 px-0">
+      <Container fluid className="px-lg-5 px-2">
         <h2 className="events-title text-center mb-2 fs-5 pFont text-secondary-color fw-bold">
           WORKSHOPS <span className="d-block pFont"> &amp; EVENTS</span>
         </h2>
@@ -78,16 +80,14 @@ const ScrollableEvents = () => {
                     role="button"
                     tabIndex={0}
                     onClick={() => navigate("/workshops")}
-                    onKeyDown={(e) => { if (e.key === "Enter") navigate("/workshops"); }}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") navigate("/workshops");
+                    }}
                   >
                     <img src="pin.png" className="pin-img mx-auto" alt="" />
                     <div className="eventcard-body position-relative">
                       <div className="polaroid-img-wrapper">
-                        <img
-                          src={mediaUrl(item.image) || FALLBACK_IMAGES[i % FALLBACK_IMAGES.length]}
-                          className="event-image"
-                          alt={item.title}
-                        />
+                        <img src={mediaUrl(item.image) || FALLBACK_IMAGES[i % FALLBACK_IMAGES.length]} className="event-image" alt={item.title} />
 
                         <div className="date-tag position-absolute top-0 start-0 m-5 px-3 py-2 rounded-4 text-center text-warning-color bg-secondary-color">
                           <div className="dt-day hFont fs-1">{start.format("ddd").toUpperCase()}</div>
@@ -102,9 +102,7 @@ const ScrollableEvents = () => {
 
                       <div className="event-title fs-1 text-center text-primary-color mb-4 hFont">{item.title}</div>
                       <div className="bg-primary-color px-2 py-3">
-                        <p className="event-desc text-secondary-color text-center lead mb-1">
-                          {item.summary || item.description}
-                        </p>
+                        <p className="event-desc text-secondary-color text-center lead mb-1">{item.summary || item.description}</p>
                         <p className="event-meta text-secondary-color text-center pFont mb-0">
                           {item.free ? "Free" : money(item.price)}
                           {item.location ? ` · ${item.location}` : ""}

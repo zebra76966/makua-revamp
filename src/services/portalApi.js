@@ -67,6 +67,11 @@ export const accountAPI = {
   },
 };
 
+export const memberAPI = {
+  /** Everything this person has with us: retreats, workshops and orders. */
+  account: () => request("/account"),
+};
+
 export const bookingAPI = {
   options: () => request("/booking/options"),
   mine: () => request("/booking"),

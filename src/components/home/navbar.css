@@ -40,8 +40,62 @@
   }
 }
 
-/* The one action in the header. Replaced a cart icon that had a hardcoded
-   "1" on it and a user icon, neither of which went anywhere. */
+/* The three actions in the header: BOOK, the basket and the account.
+   The basket and account icons came back once they had somewhere to go —
+   the old pair were decoration with a hardcoded "1" painted on. */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.nav-icon {
+  /* A 40px box round a 20px icon: the icon is what you see, the box is
+     what you hit. Without it these were 16px targets. */
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 1.25rem;
+  line-height: 1;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.nav-icon:hover { opacity: 0.7; }
+
+.nav-icon:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+  border-radius: 50%;
+}
+
+/* How many things are in the basket, sitting on the bag. */
+.nav-badge {
+  position: absolute;
+  top: 3px;
+  right: 2px;
+  min-width: 17px;
+  height: 17px;
+  padding: 0 4px;
+  display: grid;
+  place-items: center;
+  border-radius: 9px;
+  background: #a65d2b;
+  color: #fff;
+  font-size: 0.62rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0;
+  pointer-events: none;
+}
+
 .nav-book {
   font-size: 1rem;
   font-weight: 700;

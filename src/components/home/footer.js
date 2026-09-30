@@ -85,6 +85,8 @@ const Footer = () => {
           <Link to="/privacy-policy" className="text-decoration-none text-secondary-color">PRIVACY</Link>
           <Link to="/terms" className="text-decoration-none text-secondary-color">TERMS</Link>
           <Link to="/cancellation-policy" className="text-decoration-none text-secondary-color">CANCELLATIONS</Link>
+          <Link to="/shop" className="text-decoration-none text-secondary-color">SHOP</Link>
+          <Link to="/account" className="text-decoration-none text-secondary-color">MY ACCOUNT</Link>
           <Link to="/contact" className="text-decoration-none text-secondary-color">CONTACT</Link>
         </nav>
       </div>
