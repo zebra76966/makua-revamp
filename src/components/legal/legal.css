@@ -1,0 +1,78 @@
+/* ── Legal pages ─────────────────────────────────────────
+   Privacy, terms and cancellations. Long-form reading, so
+   the measure is capped and the type is bigger than the
+   marketing pages'.                                        */
+
+.legal-page {
+  padding: 9rem 0 4rem;
+}
+
+.legal-container {
+  max-width: 48rem;
+}
+
+.legal-title {
+  font-size: clamp(2rem, 6vw, 3.25rem);
+  line-height: 1.1;
+  margin-bottom: 0.75rem;
+}
+
+.legal-updated {
+  font-family: "quicksand", sans-serif;
+  font-size: 0.82rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.6;
+  margin-bottom: 2rem;
+}
+
+.legal-intro {
+  font-size: 1.15rem;
+  line-height: 1.75;
+  margin-bottom: 3rem;
+  opacity: 0.92;
+}
+
+.legal-section { margin-bottom: 2.75rem; }
+
+.legal-heading {
+  font-size: clamp(1.15rem, 3vw, 1.5rem);
+  letter-spacing: 0.02em;
+  margin-bottom: 0.9rem;
+}
+
+.legal-text {
+  font-family: "quicksand", sans-serif;
+  font-size: 1.02rem;
+  line-height: 1.8;
+  margin-bottom: 1rem;
+  opacity: 0.88;
+}
+
+.legal-list {
+  font-family: "quicksand", sans-serif;
+  font-size: 1.02rem;
+  line-height: 1.8;
+  opacity: 0.88;
+  padding-left: 1.2rem;
+  margin-bottom: 1rem;
+}
+.legal-list li { margin-bottom: 0.4rem; }
+
+.legal-contact {
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  padding-top: 1.75rem;
+  margin-top: 3rem;
+}
+.legal-contact a {
+  color: inherit;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 767px) {
+  .legal-page { padding: 7rem 0 3rem; }
+  .legal-intro { font-size: 1.05rem; margin-bottom: 2.25rem; }
+  .legal-section { margin-bottom: 2.25rem; }
+  .legal-text,
+  .legal-list { font-size: 0.98rem; line-height: 1.75; }
+}

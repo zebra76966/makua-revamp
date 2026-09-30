@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Container, Row, Col, Modal, Carousel } from "react-bootstrap";
 import { FaPlus } from "react-icons/fa";
 import { HiArrowLongRight } from "react-icons/hi2";
@@ -6,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import "./ceroTusa.css";
 
 export default function CerroTusaSprings() {
+  const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -78,7 +80,7 @@ export default function CerroTusaSprings() {
 
               <p className="facilities-list fs-5">COMFORTABLE STAYS | NATURAL WATER POOLS | WELLNESS & HEALING | CONSCIOUS DINING | IMMERSED IN NATURE | RETREAT-READY SERVICES</p>
 
-              <button className="cstm-cta border-0 fs-5 text-dark-color pFont fw-bold p-0 mt-5">
+              <button className="cstm-cta border-0 fs-5 text-dark-color pFont fw-bold p-0 mt-5" onClick={() => navigate("/retreats")}>
                 <span className="d-block pFont ps-0 pe-0 text-start d-flex align-items-center">
                   BROWSE <HiArrowLongRight className="ms-auto ico me-0" />
                 </span>

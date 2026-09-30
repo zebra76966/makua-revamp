@@ -109,7 +109,7 @@ const EventsCalendar = ({ workshops = [], loading, error, onPick }) => {
                         >
                           <div className="d-flex align-items-center">
                             <span className={`dot ${w.kind === "event" ? "event" : "workshop"}`} />
-                            <span className="event-date ms-3">{dayjs(w.startsAt).format("YYYY MMMM DD")}</span>
+                            <span className="event-date ms-3">{dayjs(w.startsAt).format("D MMM YYYY")}</span>
                           </div>
 
                           <div className="text-start w-25">

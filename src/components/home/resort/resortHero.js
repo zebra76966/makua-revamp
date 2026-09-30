@@ -1,9 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import { motion } from "framer-motion";
 import { FaVolumeUp, FaVolumeMute } from "react-icons/fa";
 
 export default function ResortHero() {
+  const navigate = useNavigate();
   const [soundOn, setSoundOn] = useState(false);
   const videoRef = useRef(null);
   const audioRef = useRef(null);
@@ -78,11 +80,11 @@ export default function ResortHero() {
       {/* Main Content */}
       <Container fluid className="d-flex flex-column justify-content-center  align-items-center text-center text-secondary-color mt-5" style={{ height: "100%", position: "relative", zIndex: 3 }}>
         <motion.h1 className="display-3 pb-4 pt-5 text-uppercase" style={{ whiteSpace: "pre-line" }} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }}>
-          {"Need a cool \n rounded,\nphrase or quote  \n here"}
+          {"STAY WHERE\nTHE MOUNTAIN\nSTILL SETS\nTHE PACE."}
         </motion.h1>
 
         <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 0.8 }}>
-          <button className="blob-btn px-5 fs-2 py-4">RESERVE</button>
+          <button className="blob-btn px-5 fs-2 py-4" onClick={() => navigate("/retreats")}>RESERVE</button>
         </motion.div>
       </Container>
 

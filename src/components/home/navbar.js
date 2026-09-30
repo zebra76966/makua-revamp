@@ -51,17 +51,16 @@ export default function MakuaNavbar() {
           onClick={() => navigate("/")}
         />
 
-        <div className="d-flex align-items-center gap-3 fs-3 text-secondary-color">
-          <div className="position-relative" style={{ cursor: "pointer" }}>
-            <img alt="" src="/shopping-cart.svg" height={40} style={{ cursor: "pointer", filter: isProductDetail ? "brightness(0) saturate(100%)" : "none" }} />
-            <div
-              className="position-absolute d-flex justify-content-center align-items-center text-white rounded-circle pFont"
-              style={{ top: "-8px", right: "-10px", background: "#c68445", width: "20px", height: "20px", fontSize: "12px" }}
-            >
-              1
-            </div>
-          </div>
-          <img alt="" src="/user.svg" height={35} style={{ cursor: "pointer", filter: isProductDetail ? "brightness(0) saturate(100%)" : "none" }} />
+        {/* There is no basket and no member area on this site — the cart
+            icon with its hardcoded "1" and the user icon both went
+            nowhere. One link that does something instead. */}
+        <div className="d-flex align-items-center gap-3">
+          <Link
+            to="/retreats"
+            className={`nav-book pFont text-decoration-none ${isProductDetail ? "text-dark-color" : "text-secondary-color"}`}
+          >
+            BOOK
+          </Link>
         </div>
       </div>
 
@@ -101,23 +100,13 @@ export default function MakuaNavbar() {
               />
 
               <div className="d-flex align-items-center gap-3 fw-bold fs-3">
-                <div className="position-relative" style={{ cursor: "pointer" }}>
-                  <img alt="" src="/shopping-cart.svg" height={40} />
-                  <div
-                    className="position-absolute d-flex justify-content-center align-items-center text-white rounded-circle"
-                    style={{
-                      top: "-8px",
-                      right: "-10px",
-                      background: "#c68445",
-                      width: "20px",
-                      height: "20px",
-                      fontSize: "1rem",
-                    }}
-                  >
-                    1
-                  </div>
-                </div>
-                <img alt="" src="/user.svg" height={35} style={{ cursor: "pointer" }} />
+                <Link
+                  to="/retreats"
+                  className="nav-book pFont text-decoration-none text-primary-color"
+                  onClick={() => setOpen(false)}
+                >
+                  BOOK
+                </Link>
               </div>
             </div>
 

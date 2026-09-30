@@ -78,7 +78,7 @@ export default function AboutHero() {
       {/* Main Content */}
       <Container fluid className="d-flex flex-column justify-content-center  align-items-center text-center text-secondary-color mt-5" style={{ height: "100%", position: "relative", zIndex: 3 }}>
         <motion.h1 className="display-3 pb-4 pt-5 text-uppercase" style={{ whiteSpace: "pre-line" }} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }}>
-          {"Need a cool \n rounded,\nphrase or quote  \n here"}
+          {"WE DIDN'T BUILD\nA RETREAT.\nWE LISTENED\nTO THE LAND."}
         </motion.h1>
 
         <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 0.8 }}>

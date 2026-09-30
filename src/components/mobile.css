@@ -1,0 +1,181 @@
+/* ══════════════════════════════════════════════════════════
+   mobile.css — the phone and tablet layer.
+
+   Loaded last, after every component stylesheet, so it can
+   correct sizes the components set for desktop without each
+   of them needing its own media query.
+
+   Why one file rather than twenty: the component stylesheets
+   were written desktop-first and only eight of twenty-eight
+   had any media query at all. Keeping the corrections in one
+   place makes them reviewable, and removable, as a set.
+
+   Rules here are deliberately narrow — sizes, spacing and
+   touch targets. Anything structural belongs in the
+   component's own stylesheet.
+   ══════════════════════════════════════════════════════════ */
+
+/* ── Touch targets ────────────────────────────────────────
+   Apple and Google both put the comfortable minimum around
+   44px. Measured before this: the header link was 66×34, the
+   footer links 362×24, the workshop RSVP buttons 47×24.      */
+@media (max-width: 991px) {
+  .nav-book {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.6rem 0.4rem;
+  }
+
+  .footer-social a,
+  .footer-legal a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* The events list on the workshops page. */
+  .event-row .event-action,
+  .wk-link-btn {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 0.25rem;
+  }
+
+  /* "I'm new here" / "I've booked before" on the booking page. */
+  .mk-toggle button { min-height: 44px; }
+
+  /* The accordion headers on a retreat page. */
+  .included-header { min-height: 48px; }
+
+  /* Carousel arrows: 26px wide is a miss more often than a hit. */
+  .carousel-control-prev,
+  .carousel-control-next { width: 44px !important; }
+
+  /* Carousel dots. The dot stays small — the thing you press
+     doesn't. */
+  .carousel-indicators button {
+    box-sizing: content-box !important;
+    height: 4px !important;              /* the dot you see */
+    padding: 20px 14px !important;       /* the area you press */
+    background-clip: content-box !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  /* "Go back" on a retreat page, and the month arrows on the
+     workshops calendar. */
+  .prodHero + button,
+  .bg-none.d-flex.align-items-center,
+  .wk-month-btn {
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+}
+
+/* ── Type ─────────────────────────────────────────────────
+   Bootstrap's display-* and fs-* classes are sized for a wide
+   screen. Left alone, a display-3 heading is 56px on a 390px
+   phone and breaks mid-word.                                 */
+@media (max-width: 767px) {
+  .display-1 { font-size: 2.6rem !important; }
+  .display-2 { font-size: 2.3rem !important; }
+  .display-3 { font-size: 2.1rem !important; }
+  .display-4 { font-size: 1.9rem !important; }
+  .display-5 { font-size: 1.7rem !important; }
+  .display-6 { font-size: 1.5rem !important; }
+
+  .fs-1 { font-size: 1.8rem !important; }
+  .fs-2 { font-size: 1.55rem !important; }
+  .fs-3 { font-size: 1.35rem !important; }
+  .fs-4 { font-size: 1.15rem !important; }
+  .fs-5 { font-size: 1.02rem !important; }
+
+  .lead { font-size: 1rem !important; }
+
+  /* Long uppercase headings with wide tracking are the ones
+     that overflow; let them break rather than push. */
+  h1, h2, h3, .hFont { overflow-wrap: anywhere; }
+
+  /* 4px of letter-spacing on a small screen wastes a lot of
+     line for no gain. */
+  .wSpacing { letter-spacing: 0.12em !important; }
+
+  /* Pill labels were 12px — legible, but not generous, and this file
+     loads before the component stylesheets it is correcting, so the
+     override has to win on weight rather than on order. */
+  .focus-tag { font-size: 13px !important; }
+  .retreat-tag { font-size: 12.5px !important; }
+  .mk-eyebrow { font-size: 0.82rem !important; }
+}
+
+/* ── Side gutters ─────────────────────────────────────────
+   px-5 is 3rem each side: 96px of a 390px screen spent on
+   margins.                                                   */
+@media (max-width: 767px) {
+  .px-5 { padding-left: 1.25rem !important; padding-right: 1.25rem !important; }
+  .px-4 { padding-left: 1rem !important; padding-right: 1rem !important; }
+  .py-5 { padding-top: 2.5rem !important; padding-bottom: 2.5rem !important; }
+  .my-5 { margin-top: 2.5rem !important; margin-bottom: 2.5rem !important; }
+  .mt-5 { margin-top: 2.5rem !important; }
+  .mb-5 { margin-bottom: 2.5rem !important; }
+}
+
+/* ── Full-height sections ─────────────────────────────────
+   ch-100 is min-height:100dvh. On a phone a section with real
+   content in it needs to be allowed to grow past one screen
+   instead of cramming.                                        */
+@media (max-width: 767px) {
+  .ch-100 {
+    min-height: auto;
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
+  }
+
+  /* Heroes keep their full height — they're one image and a
+     line of text, which is exactly what a screenful is for. */
+  .hero-bg-video,
+  .ch-100:has(> .hero-bg-video),
+  .prodHero { min-height: 100dvh; }
+}
+
+/* ── Tablet ───────────────────────────────────────────────
+   Wide enough for two columns, not for three, and not for
+   desktop's side padding.                                     */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .px-5 { padding-left: 2rem !important; padding-right: 2rem !important; }
+
+  .display-1 { font-size: 3.6rem !important; }
+  .display-2 { font-size: 3.2rem !important; }
+  .display-3 { font-size: 2.9rem !important; }
+  .display-4 { font-size: 2.5rem !important; }
+
+  /* Desktop pushes these 170px outside the carousel, which is
+     off-screen once the viewport stops being 1500px wide. */
+  .carousel-control-prev { left: 0 !important; }
+  .carousel-control-next { right: 0 !important; }
+}
+
+/* ── Video and media ──────────────────────────────────────
+   Autoplaying background video is heavy on a phone and the
+   poster is usually enough; where it does play, make sure it
+   covers rather than letterboxes.                             */
+@media (max-width: 767px) {
+  video { object-fit: cover; }
+}
+
+/* Anyone who has asked their device to reduce motion should
+   not be given a page that pans and scales. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

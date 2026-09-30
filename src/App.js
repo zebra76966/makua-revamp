@@ -1,6 +1,9 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import "./App.css";
 import "./components/master.css";
+/* Last, so the phone and tablet corrections win over the component
+   stylesheets they are correcting. */
+import "./components/mobile.css";
 
 import MakuaNavbar from "./components/home/navbar";
 import Main from "./components/home/main";
@@ -12,7 +15,9 @@ import ScrollToTop from "./components/utils/ScrollToTop";
 import AyahuascaMain from "./components/home/ayahuasca/ayahuascaMain";
 import WorkshopMain from "./components/home/workshop/workshopMain";
 import FaqsMain from "./components/faqs/faqsMain";
-import PrivacyPolicy from "./components/privacyPolicy/PrivacyPolicyMain";
+import PrivacyPolicy from "./components/legal/PrivacyPolicy";
+import Terms from "./components/legal/Terms";
+import CancellationPolicy from "./components/legal/CancellationPolicy";
 import Err404 from "./components/404";
 import BookPage from "./components/booking/BookPage";
 import ContactMain from "./components/home/contact/contactMain";
@@ -37,6 +42,10 @@ function App() {
         <Route path="/workshops" element={<WorkshopMain />} />
         <Route path="/faq" element={<FaqsMain />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/terms" element={<Terms />} />
+        <Route path="/cancellation-policy" element={<CancellationPolicy />} />
+        {/* the footer used to call this one "Cookie Policy" */}
+        <Route path="/cookie-policy" element={<Navigate to="/privacy-policy" replace />} />
         <Route path="*" element={<Err404 />} />
       </Routes>
     </Router>

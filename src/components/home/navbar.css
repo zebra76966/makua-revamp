@@ -39,3 +39,16 @@
     transform: translateY(-5%);
   }
 }
+
+/* The one action in the header. Replaced a cart icon that had a hardcoded
+   "1" on it and a user icon, neither of which went anywhere. */
+.nav-book {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  padding: 0.5rem 0.25rem;
+  border-bottom: 2px solid currentColor;
+  line-height: 1;
+  white-space: nowrap;
+}
+.nav-book:hover { opacity: 0.75; }

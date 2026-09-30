@@ -50,6 +50,11 @@ export const retreatsAPI = {
   get: (slug) => request(`/public/retreats/${encodeURIComponent(slug)}`).then((d) => d.retreat),
 };
 
+/* ── The site's own chrome: name, contact, socials, legal ─ */
+export const siteAPI = {
+  get: () => request("/public/site"),
+};
+
 /* ── Workshops and one-off events ───────────────────────── */
 export const workshopsAPI = {
   list: ({ from, to } = {}) => {

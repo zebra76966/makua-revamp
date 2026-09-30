@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import "./footer.css";
 import { Link } from "react-router-dom";
 import { formsAPI } from "../../services/api";
+import useSite, { socialLinks } from "./useSite";
 
 const Footer = () => {
+  const site = useSite();
+  const socials = socialLinks(site);
   const [email, setEmail] = useState("");
   const [state, setState] = useState({ busy: false, done: false, error: "" });
 
@@ -32,11 +35,14 @@ const Footer = () => {
             REMEMBERS YOU.
           </h1>
 
-          <div className="footer-social">
-            <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LINKEDIN</a>
-            <a href="https://www.instagram.com/" target="_blank" rel="noreferrer">INSTAGRAM</a>
-            <a href="https://www.facebook.com/" target="_blank" rel="noreferrer">FACEBOOK</a>
-          </div>
+          {/* Only what's been filled in under Settings — see useSite.js. */}
+          {socials.length > 0 && (
+            <div className="footer-social">
+              {socials.map((l) => (
+                <a key={l.key} href={l.href} target="_blank" rel="noreferrer">{l.label}</a>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Right Section */}
@@ -71,14 +77,16 @@ const Footer = () => {
       <div className="footer-bottom fs-4">
         <img src="/makua-logo-h.svg" className="footer-logo" alt="Makua" />
 
-        <div className="footer-bottom-center">©2025 MAKUA</div>
+        <div className="footer-bottom-center">
+          ©{new Date().getFullYear()} {site?.name || "MAKUA"}
+        </div>
 
-        <Link to="/privacy-policy" className=" text-decoration-none text-secondary-color">
-          PRIVACY POLICY
-        </Link>
-        <Link to="/privacy-policy" className=" text-decoration-none text-secondary-color">
-          COOKIE POLICY
-        </Link>
+        <nav className="footer-legal">
+          <Link to="/privacy-policy" className="text-decoration-none text-secondary-color">PRIVACY</Link>
+          <Link to="/terms" className="text-decoration-none text-secondary-color">TERMS</Link>
+          <Link to="/cancellation-policy" className="text-decoration-none text-secondary-color">CANCELLATIONS</Link>
+          <Link to="/contact" className="text-decoration-none text-secondary-color">CONTACT</Link>
+        </nav>
       </div>
     </footer>
   );

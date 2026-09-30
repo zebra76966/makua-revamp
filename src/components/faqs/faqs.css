@@ -20,6 +20,12 @@
   transition: transform 180ms ease;
 }
 
+/* The icon's height is set inline, so its natural width (58px) spilled out
+   of the 28px col-1 it sits in on a small phone. */
+@media (max-width: 576px) {
+  .ico { max-width: 100%; height: auto; }
+}
+
 /* ensure the question text is inline-block so vertical transform feels natural */
 .faq-question {
   display: inline-block;
@@ -38,3 +44,10 @@
   display: block;
   margin-top: 8px;
 }
+
+/* Answers are written in paragraphs; render them as such. */
+.faq-para {
+  display: block;
+  margin-bottom: 0.85rem;
+}
+.faq-para:last-child { margin-bottom: 0; }

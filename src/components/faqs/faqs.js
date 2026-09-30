@@ -3,40 +3,57 @@ import { Accordion, Container, Row, Col } from "react-bootstrap";
 import { motion } from "framer-motion";
 import "./faqs.css";
 
+/**
+ * The questions people actually ask before booking, in the order they ask
+ * them. Anything medical is answered honestly rather than reassuringly —
+ * someone on an SSRI needs to learn that here, not on arrival.
+ *
+ * Shane should check the specifics against how Makua actually runs:
+ * ceremony counts, what the screening asks, and who the facilitators are.
+ */
 const faqData = [
   {
-    question: "What is Ayahuasca?",
-    answer: `Ayahuasca originates from the Amazon rainforest, primarily in Peru, Brazil, and Colombia. At Makua, we honor the traditional roots of this medicine while offering it in a safe and intentional setting.`,
+    question: "What is ayahuasca?",
+    answer: `A traditional Amazonian brew made from the ayahuasca vine and the leaves of a companion plant. It has been used for generations by Indigenous communities across Peru, Brazil and Colombia, in ceremony and under the care of someone trained to hold it.\n\nIt is not recreational, and it is not a guaranteed experience. People describe it very differently from one another — and often differently from one ceremony to the next.`,
   },
   {
-    question: "Where does Ayahuasca come from?",
-    answer: ` Ayahuasca originates from the Amazon rainforest, primarily in Peru, Brazil, and Colombia. At Makua, we honor the traditional roots of this medicine while offering it in a safe and intentional setting.`,
+    question: "Is it safe? What about my medication?",
+    answer: `This is the question that matters most, and the honest answer is: it depends on you.\n\nSome medications are genuinely dangerous in combination with ayahuasca — particularly SSRIs and other antidepressants, MAOIs, and some medications for blood pressure and the heart. Some heart, liver and psychiatric conditions also make it unsafe, and a personal or family history of psychosis or bipolar disorder usually rules it out.\n\nBefore your retreat we ask you about your health and what you take, and our facilitators review every answer. If we think it isn't safe for you, we will say so and refund you. Please answer honestly — this screening exists to protect you, not to filter you out.\n\nIf you're unsure, talk to your doctor before you book.`,
   },
   {
-    question: "What is Ayahuasca?",
-    answer: `Ayahuasca originates from the Amazon rainforest, primarily in Peru, Brazil, and Colombia. At Makua, we honor the traditional roots of this medicine while offering it in a safe and intentional setting.`,
+    question: "Do I need experience?",
+    answer: `No. Most people who come to Makua have never sat in a ceremony before.\n\nWhat helps far more than experience is arriving rested, having followed the preparation we send you, and being willing to let the retreat be whatever it turns out to be.`,
   },
   {
-    question: "Where does Ayahuasca come from?",
-    answer: ` Ayahuasca originates from the Amazon rainforest, primarily in Peru, Brazil, and Colombia. At Makua, we honor the traditional roots of this medicine while offering it in a safe and intentional setting.`,
+    question: "What happens during a retreat?",
+    answer: `Ceremonies happen at night and are held by experienced facilitators. Days are quieter: sharing circles, rest, time outside, simple food, and space to make sense of what came up.\n\nYou'll get the full schedule before you arrive. Nothing is compulsory — if you need to sit something out, you sit it out.`,
   },
   {
-    question: "What is Ayahuasca?",
-    answer: `Ayahuasca originates from the Amazon rainforest, primarily in Peru, Brazil, and Colombia. At Makua, we honor the traditional roots of this medicine while offering it in a safe and intentional setting.`,
+    question: "Where are you, and how do I get there?",
+    answer: `We're at Cerro Tusa in Antioquia, Colombia — the pyramid-shaped mountain south of Medellín.\n\nMost guests fly into Medellín (MDE) and travel from there. Once your booking is confirmed we'll send directions and help you arrange the last stretch.`,
   },
   {
-    question: "Where does Ayahuasca come from?",
-    answer: ` Ayahuasca originates from the Amazon rainforest, primarily in Peru, Brazil, and Colombia. At Makua, we honor the traditional roots of this medicine while offering it in a safe and intentional setting.`,
+    question: "What's included in the price?",
+    answer: `Your accommodation, all meals, the ceremonies, and the preparation and integration support around them.\n\nFlights, travel insurance and anything you arrange yourself are not included. The shared room is included in the retreat price; private rooms and the treehouse carry a per-night supplement, shown before you confirm.`,
   },
   {
-    question: "What is Ayahuasca?",
-    answer: `Ayahuasca originates from the Amazon rainforest, primarily in Peru, Brazil, and Colombia. At Makua, we honor the traditional roots of this medicine while offering it in a safe and intentional setting.`,
+    question: "What should I bring?",
+    answer: `Loose comfortable clothes, something warm for the evenings, a torch, a refillable water bottle, and a notebook if you're someone who writes.\n\nWe'll send a full list, along with the dietary preparation, once you've booked.`,
   },
   {
-    question: "Where does Ayahuasca come from?",
-    answer: ` Ayahuasca originates from the Amazon rainforest, primarily in Peru, Brazil, and Colombia. At Makua, we honor the traditional roots of this medicine while offering it in a safe and intentional setting.`,
+    question: "Can I come with a friend or partner?",
+    answer: `Yes, and many people do. You can book together and share a room.\n\nOne thing worth knowing: ceremony is an individual experience even in a group, and you may want space from each other afterwards. That's normal.`,
+  },
+  {
+    question: "What if I need to cancel?",
+    answer: `Plans change and we'd rather find a way than keep your money. You can usually move to another date, or pass your place to someone else.\n\nThe full detail — including what's refundable and when — is on our cancellations page.`,
+  },
+  {
+    question: "Do you run workshops as well as retreats?",
+    answer: `Yes. Alongside the multi-day retreats we run single-day workshops and evening events — breathwork, cacao circles, sound, movement. Some are free, some are paid, and some you can simply turn up to.\n\nWhat's coming up is always on the workshops page.`,
   },
 ];
+
 
 const FAQSection = () => {
   const [activeKey, setActiveKey] = useState(null);
@@ -90,7 +107,9 @@ const FAQSection = () => {
                 <Row className="align-items-center justify-content-start">
                   <Col xs={10}>
                     <Accordion.Collapse eventKey={index.toString()}>
-                      <div className="pt-3 pe-3 text-secondary-color lead pFont">{item.answer}</div>
+                      <div className="pt-3 pe-3 text-secondary-color lead pFont">{item.answer.split(String.fromCharCode(10,10)).map((para, k) => (
+                        <span key={k} className="faq-para">{para}</span>
+                      ))}</div>
                     </Accordion.Collapse>
                   </Col>
                 </Row>
